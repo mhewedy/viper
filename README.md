@@ -1,4 +1,4 @@
 # vm
 VirtaulBox manager wrapper
 
-a script (with helper programs/scripts) to help manage virtaulbox vms
+a group of scripts/programs to help manage virtaulbox vms
