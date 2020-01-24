@@ -1,14 +1,5 @@
 #! /bin/sh
 
-# WIP
-# $1 is the vm name
-initmachine() {
-  ip=$1
-  ssh mhewedy@"$ip" <<'ENDSSH'
-echo "PS1=\"\[\e[1;35m\]\u\[\033[m\]@\h-\[\e[1;92m\]\$(hostname -I | awk '{print \$1}')\[\033[m\]:\w \$ \"" >>.bashrc
-ENDSSH
-}
-
 # $1 is the vm name
 getvmip() {
   vmname=$1
@@ -41,7 +32,6 @@ start)
     echo "getting ip address..."
     ip=$(getvmip "$2")
     echo "\033[1;32m$ip\033[0m"
-    initmachine_byip "$ip"
   fi
   ;;
 stop)
