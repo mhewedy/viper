@@ -1,31 +1,35 @@
 #! /bin/sh
 
 case $1 in
-    list)
-        vboxmanage list vms
-        ;;
-    ps)
-        vboxmanage list runningvms
-        ;;
-    create)
-        next=$(($(vboxmanage list vms | sort | tail -n 1 | cut -d " " -f1 | cut -d "\"" -f2 | cut -d "-" -f2)+1))
-        vboxmanage import $2 --vsys 0 --vmname "vm-$(printf %02d $next)" 
-        ;;
-    delete)
-        vboxmanage controlvm $2 poweroff
-        VBoxManage unregistervm $2 --delete
-        ;;
-    start)
-        vboxmanage startvm $2 --type headless
-        if [ $? -eq 0 ]; then
-            vmip $2    # see vmip subdirectory 
-            while [ $? -ne 0 ]; do echo "retrying..."; sleep 5; vmip $2; done
-        fi
-        ;;
-    stop)
-        vboxmanage controlvm $2 poweroff
-        ;;
-    *)
-        echo "usage vm (list|ps|create|delete|start|stop) [options]"
-        ;;
+list)
+  vboxmanage list vms
+  ;;
+ps)
+  vboxmanage list runningvms
+  ;;
+create)
+  next=$(($(vboxmanage list vms | sort | tail -n 1 | cut -d " " -f1 | cut -d "\"" -f2 | cut -d "-" -f2) + 1))
+  vboxmanage import $2 --vsys 0 --vmname "vm-$(printf %02d $next)"
+  ;;
+delete)
+  vboxmanage controlvm $2 poweroff
+  VBoxManage unregistervm $2 --delete
+  ;;
+start)
+  vboxmanage startvm $2 --type headless
+  if [ $? -eq 0 ]; then
+    vmip $2 # see vmip subdirectory
+    while [ $? -ne 0 ]; do
+      echo "retrying..."
+      sleep 5
+      vmip $2
+    done
+  fi
+  ;;
+stop)
+  vboxmanage controlvm $2 poweroff
+  ;;
+*)
+  echo "usage vm (list|ps|create|delete|start|stop) [options]"
+  ;;
 esac
