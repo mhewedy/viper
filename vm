@@ -3,13 +3,8 @@
 # WIP
 # $1 is the vm name
 initmachine() {
-  vmname=$1
-  echo "initializing the machine... $vmname"
-  ip=$(getvmip "$vmname")
-  echo "ip=$ip"
-
+  ip=$1
   ssh mhewedy@"$ip" <<'ENDSSH'
-touch x
 echo "PS1=\"\[\e[1;35m\]\u\[\033[m\]@\h-\[\e[1;92m\]\$(hostname -I | awk '{print \$1}')\[\033[m\]:\w \$ \"" >>.bashrc
 ENDSSH
 }
