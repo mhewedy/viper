@@ -27,19 +27,18 @@ func main() {
 	}
 	vmName := flag.Arg(0)
 
-	fmt.Println("getting ip address for:", vmName)
-
 	ping()
 	mac, _ := getMACAddr(vmName)
 	arp := getArpTable()
 
-	for _, a := range arp {
+	for i := len(arp) - 1; i >= 0; i-- {
+		a := arp[i]
 		if a.mac == mac {
 			fmt.Println(a.ip)
 			return
 		}
 	}
-	fmt.Println("error: cannot find ip address")
+
 	os.Exit(-1)
 }
 
