@@ -21,8 +21,8 @@ ps)
   vboxmanage list runningvms
   ;;
 create)
-  next=$(($(vboxmanage list vms | sort | tail -n 1 | cut -d " " -f1 | cut -d "\"" -f2 | cut -d "-" -f2) + 1))
-  vmname="vm-$(printf %02d $next)"
+  next=$(($(vboxmanage list vms | sort | tail -n 1 | cut -d " " -f1 | cut -d "\"" -f2 | cut -d "_" -f2) + 1))
+  vmname="vm_$(printf %02d $next)"
   vboxmanage import "$2" --vsys 0 --vmname "$vmname"
   ;;
 delete)
