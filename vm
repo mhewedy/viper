@@ -14,7 +14,7 @@ getvmip() {
 }
 
 case $1 in
-list)
+ls)
   vboxmanage list vms
   ;;
 ps)
@@ -25,7 +25,7 @@ create)
   vmname="vm_$(printf %02d $next)"
   vboxmanage import "$2" --vsys 0 --vmname "$vmname"
   ;;
-delete) # accept multiple vms names
+rm) # accept multiple vms names
   for vmname in "${@:2}"; do
     echo "deleting $vmname ..."
     vboxmanage controlvm "$vmname" poweroff
@@ -50,6 +50,6 @@ stop) # accept multiple vms names
   done
   ;;
 *)
-  echo "usage vm (list|ps|create|delete|start|stop) [options]"
+  echo "usage vm (ls|ps|create|rm|start|stop) [options]"
   ;;
 esac
