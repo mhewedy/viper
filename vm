@@ -25,20 +25,29 @@ create)
   vmname="vm_$(printf %02d $next)"
   vboxmanage import "$2" --vsys 0 --vmname "$vmname"
   ;;
-delete)
-  vboxmanage controlvm "$2" poweroff
-  VBoxManage unregistervm "$2" --delete
+delete) # accept multiple vms names
+  for vmname in "${@:2}"; do
+    echo "deleting $vmname ..."
+    vboxmanage controlvm "$vmname" poweroff
+    VBoxManage unregistervm "$vmname" --delete
+  done
   ;;
-start)
-  vboxmanage startvm "$2" --type headless
-  if [ $? -eq 0 ]; then
-    echo "getting ip address..."
-    ip=$(getvmip "$2")
-    echo "\033[1;32m$ip\033[0m"
-  fi
+start) # accept multiple vms names
+  for vmname in "${@:2}"; do
+    echo "starting $vmname ..."
+    vboxmanage startvm "$vmname" --type headless
+    if [ $? -eq 0 ]; then
+      echo "getting ip address..."
+      ip=$(getvmip "$vmname")
+      echo "\033[1;32m$ip\033[0m"
+    fi
+  done
   ;;
-stop)
-  vboxmanage controlvm $2 poweroff
+stop) # accept multiple vms names
+  for vmname in "${@:2}"; do
+    echo "stoping $vmname ..."
+    vboxmanage controlvm $"vmname" poweroff
+  done
   ;;
 *)
   echo "usage vm (list|ps|create|delete|start|stop) [options]"
