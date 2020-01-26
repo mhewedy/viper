@@ -14,10 +14,10 @@ getvmip() {
 }
 
 case $1 in
-ls)
+ls) # vm ls
   vboxmanage list vms
   ;;
-ps)
+ps) # vm ps
   vboxmanage list runningvms
   ;;
 create)
@@ -25,14 +25,28 @@ create)
   vmname="vm_$(printf %02d $next)"
   vboxmanage import "$2" --vsys 0 --vmname "$vmname"
   ;;
-rm) # accept multiple vms names
+rm) # vm rm <vmname>...
+
+  if [ $# -eq 1 ]; then
+    echo "usage: vm rm <vmname>..."
+    exit 0
+  fi
+
+  # accept multiple vms names
   for vmname in "${@:2}"; do
     echo "deleting $vmname ..."
     vboxmanage controlvm "$vmname" poweroff
     VBoxManage unregistervm "$vmname" --delete
   done
   ;;
-start) # accept multiple vms names
+start) # vm start <vmname>...
+
+  if [ $# -eq 1 ]; then
+    echo "usage: vm start <vmname>..."
+    exit 0
+  fi
+
+  # accept multiple vms names
   for vmname in "${@:2}"; do
     echo "starting $vmname ..."
     vboxmanage startvm "$vmname" --type headless
@@ -43,13 +57,20 @@ start) # accept multiple vms names
     fi
   done
   ;;
-stop) # accept multiple vms names
+stop) # vm stop <vmname>...
+
+  if [ $# -eq 1 ]; then
+    echo "usage: vm stop <vmname>..."
+    exit 0
+  fi
+
+  # accept multiple vms names
   for vmname in "${@:2}"; do
     echo "stoping $vmname ..."
     vboxmanage controlvm $"vmname" poweroff
   done
   ;;
 *)
-  echo "usage vm (ls|ps|create|rm|start|stop) [options]"
+  echo "usage: vm (ls|ps|create|rm|start|stop) [options]"
   ;;
 esac
