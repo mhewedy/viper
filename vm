@@ -1,7 +1,6 @@
 #! /bin/sh
 
-#consider change the PS1 env var to include the ip addr:
-#export PS1="\[\e[1;35m\]\u\[\033[m\]@\h-\[\e[1;92m\]\$(hostname -I | awk '{print \$1}')\[\033[m\]:\w \$ "
+# --- start of util functions
 
 # $1 is the vm name
 getvmip() {
@@ -13,6 +12,53 @@ getvmip() {
   done
 }
 
+# -- start of case functions
+new_fn() {
+  next=$(($(vboxmanage list vms | sort | tail -n 1 | cut -d " " -f1 | cut -d "\"" -f2 | cut -d "_" -f2) + 1))
+  vmname="vm_$(printf %02d $next)"
+  vboxmanage import "$2" --vsys 0 --vmname "$vmname"
+
+  # FIXME: work on provistioners
+  #consider change the PS1 env var to include the ip addr:
+  #export PS1="\[\e[1;35m\]\u\[\033[m\]@\h-\[\e[1;92m\]\$(hostname -I | awk '{print \$1}')\[\033[m\]:\w \$ "
+}
+
+rm_fn() {
+  # accept multiple vms names
+  for vmname in "${@:2}"; do
+    echo "deleting $vmname ..."
+    vboxmanage controlvm "$vmname" poweroff
+    VBoxManage unregistervm "$vmname" --delete
+  done
+}
+
+start_fn() {
+  # accept multiple vms names
+  for vmname in "${@:2}"; do
+    echo "starting $vmname ..."
+    vboxmanage startvm "$vmname" --type headless
+  done
+}
+
+stop_fn() {
+  # accept multiple vms names
+  for vmname in "${@:2}"; do
+    echo "stoping $vmname ..."
+    vboxmanage controlvm "$vmname" poweroff
+  done
+}
+
+ssh_fn() {
+  if [ $# -eq 1 ]; then
+    echo "usage: vm ssh <vmname>"
+    exit 0
+  fi
+
+  ip=$(getvmip "$2")
+  ssh mhewedy@"$ip"
+}
+
+# ---- start of case statement
 case $1 in
 ls) # vm ls
   vboxmanage list vms
@@ -21,63 +67,34 @@ ps) # vm ps
   vboxmanage list runningvms
   ;;
 new)
-  next=$(($(vboxmanage list vms | sort | tail -n 1 | cut -d " " -f1 | cut -d "\"" -f2 | cut -d "_" -f2) + 1))
-  vmname="vm_$(printf %02d $next)"
-  vboxmanage import "$2" --vsys 0 --vmname "$vmname"
+  new_fn "$@"
   ;;
 rm) # vm rm <vmname>...
-
   if [ $# -eq 1 ]; then
     echo "usage: vm rm <vmname>..."
     exit 0
   fi
 
-  # accept multiple vms names
-  for vmname in "${@:2}"; do
-    echo "deleting $vmname ..."
-    vboxmanage controlvm "$vmname" poweroff
-    VBoxManage unregistervm "$vmname" --delete
-  done
+  rm_fn "$@"
   ;;
 start) # vm start <vmname>...
-
   if [ $# -eq 1 ]; then
     echo "usage: vm start <vmname>..."
     exit 0
   fi
 
-  # accept multiple vms names
-  for vmname in "${@:2}"; do
-    echo "starting $vmname ..."
-    vboxmanage startvm "$vmname" --type headless
-    if [ $? -eq 0 ]; then
-      echo "getting ip address..."
-      ip=$(getvmip "$vmname")
-      echo "\033[1;32m$ip\033[0m"
-    fi
-  done
+  start_fn "$@"
   ;;
 stop) # vm stop <vmname>...
-
   if [ $# -eq 1 ]; then
     echo "usage: vm stop <vmname>..."
     exit 0
   fi
 
-  # accept multiple vms names
-  for vmname in "${@:2}"; do
-    echo "stoping $vmname ..."
-    vboxmanage controlvm $"vmname" poweroff
-  done
+  stop_fn "$@"
   ;;
 ssh) # vm ssh <vmname>
-
-  if [ $# -eq 1 ]; then
-    echo "usage: vm ssh <vmname>"
-    exit 0
-  fi
-  ip=$(getvmip "$2")
-  ssh mhewedy@"$ip"
+  ssh_fn "$@"
   ;;
 *)
   echo "usage: vm (ls|ps|new|rm|start|stop|ssh) [options]"
