@@ -20,7 +20,7 @@ ls) # vm ls
 ps) # vm ps
   vboxmanage list runningvms
   ;;
-create)
+new)
   next=$(($(vboxmanage list vms | sort | tail -n 1 | cut -d " " -f1 | cut -d "\"" -f2 | cut -d "_" -f2) + 1))
   vmname="vm_$(printf %02d $next)"
   vboxmanage import "$2" --vsys 0 --vmname "$vmname"
@@ -71,6 +71,6 @@ stop) # vm stop <vmname>...
   done
   ;;
 *)
-  echo "usage: vm (ls|ps|create|rm|start|stop) [options]"
+  echo "usage: vm (ls|ps|new|rm|start|stop) [options]"
   ;;
 esac
