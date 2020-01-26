@@ -61,10 +61,10 @@ ssh_fn() {
 # ---- start of case statement
 case $1 in
 ls) # vm ls
-  vboxmanage list vms
+  vboxmanage list vms | cut -d " " -f1 | cut -d "\"" -f2
   ;;
 ps) # vm ps
-  vboxmanage list runningvms
+  vboxmanage list runningvms | cut -d " " -f1 | cut -d "\"" -f2
   ;;
 new)
   new_fn "$@"
