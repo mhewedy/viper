@@ -25,18 +25,28 @@ func main() {
 		fmt.Println("usage: vmip <vmName>")
 		os.Exit(-1)
 	}
+
 	vmName := flag.Arg(0)
-
-	ping()
 	mac, _ := getMACAddr(vmName)
-	arp := getArpTable()
 
-	for i := len(arp) - 1; i >= 0; i-- {
-		a := arp[i]
-		if a.mac == mac {
-			fmt.Println(a.ip)
-			return
+	var pong bool
+
+	for {
+		arp := getArpTable()
+		for i := len(arp) - 1; i >= 0; i-- {
+			a := arp[i]
+			if a.mac == mac {
+				fmt.Println(a.ip)
+				return
+			}
 		}
+
+		if pong {
+			break
+		}
+
+		ping()
+		pong = true
 	}
 
 	os.Exit(-1)
