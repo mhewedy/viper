@@ -22,14 +22,24 @@ const max = 255
 func main() {
 	flag.Parse()
 	if len(flag.Args()) < 1 {
-		fmt.Println("usage: vmip <vmName>")
+		fmt.Println("usage: vmip <vmName> [--purge]")
 		os.Exit(-1)
 	}
 
 	vmName := flag.Arg(0)
+	purge := false
+	if len(flag.Args()) > 1 {
+		purge = flag.Arg(1) == "--purge"
+	}
+
 	mac, _ := getMACAddr(vmName)
 
 	var pong bool
+
+	if purge {
+		ping()
+		pong = true
+	}
 
 	for {
 		arp := getArpTable()
