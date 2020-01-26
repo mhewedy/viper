@@ -70,7 +70,16 @@ stop) # vm stop <vmname>...
     vboxmanage controlvm $"vmname" poweroff
   done
   ;;
+ssh) # vm ssh <vmname>
+
+  if [ $# -eq 1 ]; then
+    echo "usage: vm ssh <vmname>"
+    exit 0
+  fi
+  ip=$(getvmip "$2")
+  ssh mhewedy@"$ip"
+  ;;
 *)
-  echo "usage: vm (ls|ps|new|rm|start|stop) [options]"
+  echo "usage: vm (ls|ps|new|rm|start|stop|ssh) [options]"
   ;;
 esac
