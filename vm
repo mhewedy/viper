@@ -18,9 +18,13 @@ new_fn() {
   vmname="vm_$(printf %02d $next)"
   vboxmanage import "$2" --vsys 0 --vmname "$vmname"
 
-  # FIXME: work on provistioners
-  #consider change the PS1 env var to include the ip addr:
-  #export PS1="\[\e[1;35m\]\u\[\033[m\]@\h-\[\e[1;92m\]\$(hostname -I | awk '{print \$1}')\[\033[m\]:\w \$ "
+  # custom script
+  if [[ $? -eq 0 && $# -eq 3 ]]; then
+    echo "provisioning"
+    # FIXME: work on provistioners
+    #consider change the PS1 env var to include the ip addr:
+    #export PS1="\[\e[1;35m\]\u\[\033[m\]@\h-\[\e[1;92m\]\$(hostname -I | awk '{print \$1}')\[\033[m\]:\w \$ "
+  fi
 }
 
 rm_fn() {
@@ -88,11 +92,20 @@ ssh)
     echo "usage: vm stop <vmname>"
     exit 2
   fi
-
-  ssh mhewedy@"$(getvmip "$2")"
+  ip=$(getvmip "$2")
+  ssh mhewedy@"$ip"
+  ;;
+pack) # WIP
+  if [ $# -eq 1 ]; then
+    echo "usage: vm pack <vmname>"
+    exit 2
+  fi
+  #vboxmanage controlvm "$2" poweroff
+  vboxmanage export "$2" -o vm.ova --ovf10 --manifest --options nomacs --vsys 0 --vmname vm
+  #vboxmanage startvm "$2" --type headless
   ;;
 *)
-  echo "usage: vm (ls|ps|new|rm|start|stop|ssh) [options]"
+  echo "usage: vm (ls|ps|new|rm|start|stop|ssh|pack) [options]"
   exit 2
   ;;
 esac
