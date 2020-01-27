@@ -48,16 +48,6 @@ stop_fn() {
   done
 }
 
-ssh_fn() {
-  if [ $# -eq 1 ]; then
-    echo "usage: vm ssh <vmname>"
-    exit 0
-  fi
-
-  ip=$(getvmip "$2")
-  ssh mhewedy@"$ip"
-}
-
 # ---- start of case statement
 case $1 in
 ls) # vm ls
@@ -69,34 +59,40 @@ ps) # vm ps
 new)
   new_fn "$@"
   ;;
-rm) # vm rm <vmname>...
+rm)
   if [ $# -eq 1 ]; then
     echo "usage: vm rm <vmname>..."
-    exit 0
+    exit 2
   fi
 
   rm_fn "$@"
   ;;
-start) # vm start <vmname>...
+start)
   if [ $# -eq 1 ]; then
     echo "usage: vm start <vmname>..."
-    exit 0
+    exit 2
   fi
 
   start_fn "$@"
   ;;
-stop) # vm stop <vmname>...
+stop)
   if [ $# -eq 1 ]; then
     echo "usage: vm stop <vmname>..."
-    exit 0
+    exit 2
   fi
 
   stop_fn "$@"
   ;;
-ssh) # vm ssh <vmname>
-  ssh_fn "$@"
+ssh)
+  if [ $# -eq 1 ]; then
+    echo "usage: vm stop <vmname>"
+    exit 2
+  fi
+
+  ssh mhewedy@"$(getvmip "$2")"
   ;;
 *)
   echo "usage: vm (ls|ps|new|rm|start|stop|ssh) [options]"
+  exit 2
   ;;
 esac
