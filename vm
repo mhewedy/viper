@@ -1,5 +1,8 @@
 #! /bin/sh
 
+# this script is more towards when the network settings is bridge,
+# however I think it works in other settings as well.
+
 # --- start of util functions
 
 # $1 is the vm name
