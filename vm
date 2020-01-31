@@ -3,6 +3,10 @@
 # this script is more towards when the network settings is bridge,
 # however I think it works in other settings as well.
 
+# default user and password to the vm
+vmuser="mhewedy"
+vmpassword="password"
+
 # --- start of util functions
 
 # $1 is the vm name
@@ -20,6 +24,9 @@ new_fn() {
   next=$(($(vboxmanage list vms | sort | tail -n 1 | cut -d " " -f1 | cut -d "\"" -f2 | cut -d "_" -f2) + 1))
   vmname="vm_$(printf %02d $next)"
   vboxmanage import "$2" --vsys 0 --vmname "$vmname"
+
+  ## todo accept provision script as param $3
+  # use $vmuser and $vmpassword to execute provision commands
 }
 
 rm_fn() {
@@ -88,7 +95,7 @@ ssh)
     exit 2
   fi
   ip=$(getvmip "$2")
-  ssh mhewedy@"$ip"
+  ssh "$vmuser@$ip"
   ;;
 *)
   echo "usage: vm (ls|ps|new|rm|start|stop|ssh) [options]"
