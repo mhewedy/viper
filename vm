@@ -20,13 +20,18 @@ getvmip() {
 }
 
 # -- start of case functions
-new_fn() {
+create_fn() {
   next=$(($(vboxmanage list vms | sort | tail -n 1 | cut -d " " -f1 | cut -d "\"" -f2 | cut -d "_" -f2) + 1))
   vmname="vm_$(printf %02d $next)"
   vboxmanage import "$2" --vsys 0 --vmname "$vmname"
-
-  ## todo accept provision script as param $3
-  # use $vmuser and $vmpassword to execute provision commands
+  #  vmname="vm_01"
+  #
+  #  if [ "$#" -gt 2 ]; then
+  #    script=$3
+  #    echo "executing script $script"
+  #    ip=$(getvmip "$vmname")
+  #    ssh -t "$vmuser@$ip" "sudo mkdir /testme"# < "$script"
+  #  fi
 }
 
 rm_fn() {
@@ -62,8 +67,8 @@ ls) # vm ls
 ps) # vm ps
   vboxmanage list runningvms | cut -d " " -f1 | cut -d "\"" -f2
   ;;
-new)
-  new_fn "$@"
+create)
+  create_fn "$@"
   ;;
 rm)
   if [ $# -eq 1 ]; then
@@ -98,7 +103,7 @@ ssh)
   ssh "$vmuser@$ip"
   ;;
 *)
-  echo "usage: vm (ls|ps|new|rm|start|stop|ssh) [options]"
+  echo "usage: vm (ls|ps|create|rm|start|stop|ssh) [options]"
   exit 2
   ;;
 esac
