@@ -96,7 +96,7 @@ stop)
   ;;
 ssh)
   if [ $# -eq 1 ]; then
-    echo "usage: vm stop <vmname>"
+    echo "usage: vm ssh <vmname>"
     exit 2
   fi
   ip=$(getvmip "$2")
