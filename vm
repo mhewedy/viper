@@ -72,7 +72,7 @@ create)
   ;;
 rm)
   if [ $# -eq 1 ]; then
-    echo "usage: vm rm <vmname>..."
+    printf "Usage:\n\tvm rm <vmname1>,[vmname2],...\n\n"
     exit 2
   fi
 
@@ -80,7 +80,7 @@ rm)
   ;;
 start)
   if [ $# -eq 1 ]; then
-    echo "usage: vm start <vmname>..."
+    printf "Usage:\n\tvm start <vmname1>,[vmname2],...\n\n"
     exit 2
   fi
 
@@ -88,7 +88,7 @@ start)
   ;;
 stop)
   if [ $# -eq 1 ]; then
-    echo "usage: vm stop <vmname>..."
+    printf "Usage:\n\tvm stop <vmname1>,[vmname2],...\n\n"
     exit 2
   fi
 
@@ -96,14 +96,14 @@ stop)
   ;;
 ssh)
   if [ $# -eq 1 ]; then
-    echo "usage: vm ssh <vmname>"
+    printf "Usage:\n\tvm ssh <vmname>\n\n"
     exit 2
   fi
   ip=$(getvmip "$2")
   ssh "$vmuser@$ip"
   ;;
 *)
-  echo "usage: vm (ls|ps|create|rm|start|stop|ssh) [options]"
+  printf "Usage:\n\tvm (ls | ps | create | rm | start | stop | ssh) [options]\n\n"
   exit 2
   ;;
 esac
