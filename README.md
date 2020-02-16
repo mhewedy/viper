@@ -7,6 +7,7 @@ Group of scripts/programs to help manage virtaulbox vms
   * [Installation](#installation)
   * [Usage](#usage)
   * [Why not Vagrant](#why-not-vagrant)
+  * [FAQs](#faqs)
 
 ## Prerequisites
 * [VirtualBox ](https://www.virtualbox.org/wiki/Downloads)
@@ -75,3 +76,7 @@ $ vm rm vm_03
 
 Vagrant is greate, but I wanted very simple script to control my local VMs.   
 Vagrant is very powerful in provisioning part, but mostly I don't need such feature, moreover I don't want to mantain such `VagrantFile` and I see the concept of local vs global boxes is not suited to my case.
+
+## FAQs
+* `vm ssh <vm-name>` says port not open
+ This is usually because the VM ip address has been changed, use `vmip <vm-name> --purge` then `vm ssh <vm-name>`
