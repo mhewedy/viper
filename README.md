@@ -26,8 +26,6 @@ You need to have an **ova** file already created, see this [post](https://www.ma
 Usually first, you need to create a new VM the regular way using Virtual Box only once and customize it according to your own needs.(e.g. edit the `/etc/sources.list` to point to some apt-cahcer server, customize the `PS1` variable to contains the ip addr of the machine, etc...)    
 Then export this VM as an **ova** file - as in the link above - and then use this ova file in the create command:
 
-> You can download ready made OVA file for ubuntu from [here](https://cloud-images.ubuntu.com/bionic/current/)
-
 ```
 $ vm create /path/to/exported.ova
 ```
