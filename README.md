@@ -75,5 +75,5 @@ $ vm rm vm_03
 
 ## Why not Vagrant:
 
-Vagrant is greate, but I wanted very simple script to control my local VMs.
+Vagrant is greate, but I wanted very simple script to control my local VMs.   
 Vagrant is very powerful in provisioning part, but mostly I don't need such feature, and I don't want to mantain such VagrantFile.
