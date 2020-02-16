@@ -8,7 +8,7 @@ stoppedVms() {
 
 _vm() {
   local state
-  _arguments '1: :(ls ps create rm start stop ssh)' '2: :->vms'
+  _arguments '1: :(ls ps create rm start stop ssh)' '*: :->vms'
 
   case $state in
   vms)
