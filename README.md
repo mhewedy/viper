@@ -16,8 +16,6 @@ Group of scripts/programs to help manage virtaulbox vms
 > golang compiler needed to create `vmip` executable, which is used to find the IP address of particular VM. (used by the vm script)
 
 ## Installation
-> Make sure that "$HOME"/bin is on your path, otherwise modify your `.zshrc` or `.bashrc` file to add it.
-
 Download or clone the repository and run `./build.sh`
 
 ## Usage:
