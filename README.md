@@ -1,5 +1,5 @@
 # vm
-VirtaulBox manager wrapper
+VirtualBox manager wrapper
 
 Group of scripts/programs to help manage virtaulbox vms
 
