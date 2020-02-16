@@ -6,7 +6,7 @@ Group of scripts/programs to help manage virtaulbox vms
   * [Prerequisites](#prerequisites)
   * [Installation](#installation)
   * [Usage](#usage)
-  * [Why not vagrant](#why-not-vagrant)
+  * [Why not Vagrant](#why-not-vagrant)
 
 ## Prerequisites
 * [VirtualBox ](https://www.virtualbox.org/wiki/Downloads)
