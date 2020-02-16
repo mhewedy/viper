@@ -13,7 +13,7 @@ a group of scripts/programs to help manage virtaulbox vms
 ## Installation
 > Make sure that "$HOME"/bin is on your path, otherwise modify your `.zshrc` or `.bashrc` file to add it.
 
-Download the repository and run `./build.sh`
+Download or clone the repository and run `./build.sh`
 
 ## Usage:
 
