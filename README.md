@@ -11,7 +11,7 @@ Group of scripts/programs to help manage virtaulbox vms
 ## Prerequisites
 * [VirtualBox ](https://www.virtualbox.org/wiki/Downloads)
 * [Golang compiler](https://golang.org/dl/) > v 1.13
-* [Oh My Zsh](https://github.com/ohmyzsh/ohmyzsh) - Not a requirement, however the autocomplete will only works for zsh.
+* [zsh](https://github.com/ohmyzsh/ohmyzsh/wiki/Installing-ZSH) - Not a requirement, however the autocomplete will only works for zsh.
 
 > golang compiler needed to create `vmip` executable, which is used to find the IP address of particular VM. (used by the vm script)
 
