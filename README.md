@@ -13,8 +13,6 @@ a group of scripts/programs to help manage virtaulbox vms
 ## Installation
 > Make sure that "$HOME"/bin is on your path, otherwise modify your `.zshrc` or `.bashrc` file.
 
-> The autocompletion only works if **zsh** is the default shell.
-
 Download the repository and run `./build.sh`
 
 ## Usage:
