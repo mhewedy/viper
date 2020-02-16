@@ -1,7 +1,11 @@
 # vm
 VirtaulBox manager wrapper
 
-a group of scripts/programs to help manage virtaulbox vms
+Group of scripts/programs to help manage virtaulbox vms
+
+  * [Prerequisites](#prerequisites)
+  * [Installation](#installation)
+  * [Usage](#usage)
 
 ## Prerequisites
 * [VirtualBox ](https://www.virtualbox.org/wiki/Downloads)
