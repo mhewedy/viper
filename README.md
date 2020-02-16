@@ -7,16 +7,15 @@ a group of scripts/programs to help manage virtaulbox vms
 * [VirtualBox ](https://www.virtualbox.org/wiki/Downloads)
 * [Golang compiler](https://golang.org/dl/)
 
+> golang compiler needed to create `vmip` executable, which is used to find the IP address of particular VM. (used by the vm script)
+
 ## Installation
 Download the repository and run `./build.sh`
 > Make sure that "$HOME"/bin is on your path, otherwise modify your `.zshrc` or `.bashrc` file.
+
 > The autocompletion only works if **zsh** is the default shell.
 
-
 ## Usage:
-
-print usage by typing `vm` in the command line after installtion.
-
 
 ### Create a new VM
 You need to have an ova file already created, see this [post](https://www.maketecheasier.com/import-export-ova-files-in-virtualbox/) to know how to export your vm as ova in virtual box.
