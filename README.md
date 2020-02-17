@@ -1,10 +1,11 @@
 # vm
 VirtualBox manager wrapper
 
-Group of scripts/programs to help manage virtaulbox vms
-
-Tested on *zsh* on **macos**
-
+Group of scripts/programs to help manage VirtualBox vms    
+Tested on:
+ * **macos** (*zsh*)
+ * **ubuntu** (*zsh*, *bash*)
+----
   * [Prerequisites](#prerequisites)
   * [Installation](#installation)
   * [Usage](#usage)
