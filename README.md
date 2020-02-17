@@ -14,7 +14,7 @@ Tested on:
 
 ## Prerequisites
 * [VirtualBox ](https://www.virtualbox.org/wiki/Downloads)
-* [Golang compiler](https://golang.org/dl/) > v 1.13
+* [Golang compiler](https://golang.org/dl/) >= v 1.13
 * [zsh](https://github.com/ohmyzsh/ohmyzsh/wiki/Installing-ZSH) - Not a requirement, however the autocomplete will only works for zsh.
 
 > golang compiler needed to create `vmip` executable, which is used to find the IP address of particular VM. (used by the vm script)
