@@ -25,11 +25,14 @@ Download or clone the repository and run `./build.sh`
 ## Usage:
 
 ### Create a new VM
-You need to have an **ova** file already created, see this [post](https://www.maketecheasier.com/import-export-ova-files-in-virtualbox/) to know how to export your vm as ova in virtual box.
 
-Usually first, you need to create a new VM the regular way using Virtual Box only once and customize it according to your own needs.(e.g. edit the `/etc/sources.list` to point to some apt-cahcer server, customize the `PS1` variable to contains the ip addr of the machine, etc...)    
-Then export this VM as an **ova** file - as in the link above - and then use this ova file in the create command:
+The following steps need to do once:
+1. [Install Linux on VirtualBox](https://www.wikihow.com/Install-Ubuntu-on-VirtualBox)
+2. [Change network settings to *Bridge*](https://www.opentechguides.com/how-to/article/virtualbox/140/vm-virtualbox-networking.html)
+3. Optional - You may need to login to the VM and do some customizations (customzie `PS1` to contains the IP of the VM, e.g. `PS1="\[\e[1;35m\]\u\[\033[m\]@\h-\[\e[1;92m\]$(hostname -I | awk '{print $1}')\[\033[m\]:\w \$ "` )
+4. [Export the VM as *OVA*](https://www.maketecheasier.com/import-export-ova-files-in-virtualbox/)
 
+Then each time you need to create a new VM execute the following command:
 ```
 $ vm create /path/to/exported.ova
 ```
