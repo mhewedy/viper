@@ -1,4 +1,4 @@
-#! /bin/sh
+#! /bin/bash
 
 # this script is more towards when the network settings is bridge,
 # however I think it works in other settings as well.
