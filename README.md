@@ -3,6 +3,8 @@ VirtualBox manager wrapper
 
 Group of scripts/programs to help manage virtaulbox vms
 
+Tested on macos
+
   * [Prerequisites](#prerequisites)
   * [Installation](#installation)
   * [Usage](#usage)
