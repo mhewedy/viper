@@ -26,7 +26,7 @@ Download or clone the repository and run `./build.sh`
 
 ### Create a new VM
 
-The following steps need to do once:
+The following steps need to do **once**:
 1. [Install Linux on VirtualBox](https://www.wikihow.com/Install-Ubuntu-on-VirtualBox)
 2. [Change network settings to *Bridge*](https://www.opentechguides.com/how-to/article/virtualbox/140/vm-virtualbox-networking.html)
 3. Optional - You may need to login to the VM and do some customizations (customzie `PS1` to contains the IP of the VM, e.g. `PS1="\[\e[1;35m\]\u\[\033[m\]@\h-\[\e[1;92m\]$(hostname -I | awk '{print $1}')\[\033[m\]:\w \$ "` )
