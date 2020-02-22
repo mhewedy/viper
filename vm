@@ -136,7 +136,7 @@ Available commands:
   ps        List all running VMs
   create    Create a VM from OVA file
   start     Start one or more VMs
-  ssh       ssh into a running VM, the VM shoud be started first
+  ssh       ssh into a running VM
   stop      Stop one or more VMs
   rm        Remove one or more VMs
 "
