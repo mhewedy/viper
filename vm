@@ -88,12 +88,12 @@ stop)
   stop_fn "$@"
   ;;
 ssh)
-  if [ $# -eq 1 ]; then
+  if [ $# -lt 1 ]; then
     printf "Usage:\n\tvm ssh <vmname>\n\n"
     exit 2
   fi
   ip=$(getvmip "$2")
-  ssh "$vmuser@$ip"
+  ssh "$vmuser@$ip" "${@:3}"
   ;;
 *)
   printf "Usage:\n\tvm (ls | ps | create | rm | start | stop | ssh) [options]\n\n"
