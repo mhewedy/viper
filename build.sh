@@ -6,10 +6,10 @@ cd vmip; make; cd -
 
 if [ -f "$HOME"/.zshrc ]; then
   printf "\n# vm autocompletion script
-  if [ -f '%s/zsh-autocompletion.sh' ];then
-    . '%s/zsh-autocompletion.sh';
-  fi\n" "$(pwd)" "$(pwd)" >>"$HOME"/.zshrc
-  
+if [ -f '%s/zsh-autocompletion.sh' ];then
+  . '%s/zsh-autocompletion.sh';
+fi\n" "$(pwd)" "$(pwd)" >>"$HOME"/.zshrc
+
   printf "\n# add vm scripts to path \nexport PATH=\$PATH:\$HOME/bin\n\n" >>"$HOME"/.zshrc
 fi
 
