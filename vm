@@ -61,11 +61,25 @@ ps) # vm ps
   vboxmanage list runningvms | cut -d " " -f1 | cut -d "\"" -f2
   ;;
 create)
+  if [ $# -lt 2 ]; then
+    printf "Usage: vm create <path/to/image.ova>
+
+Examples:
+$ vm create ~/work/VMS/ubuntu.ova
+
+"
+    exit 2
+  fi
   create_fn "$@"
   ;;
 rm)
   if [ $# -eq 1 ]; then
-    printf "Usage:\n\tvm rm <vmname1>,[vmname2],...\n\n"
+    printf "Usage: vm rm <vmname1> [,vmname2, ...]
+
+Examples:
+$ vm rm vm_01
+
+"
     exit 2
   fi
 
@@ -73,7 +87,12 @@ rm)
   ;;
 start)
   if [ $# -eq 1 ]; then
-    printf "Usage:\n\tvm start <vmname1>,[vmname2],...\n\n"
+    printf "Usage: vm start <vmname1> [,vmname2, ...]
+
+Examples:
+$ vm start vm_01
+
+"
     exit 2
   fi
 
@@ -81,22 +100,46 @@ start)
   ;;
 stop)
   if [ $# -eq 1 ]; then
-    printf "Usage:\n\tvm stop <vmname1>,[vmname2],...\n\n"
+    printf "Usage: vm stop <vmname1> [,vmname2, ...]
+
+Examples:
+$ vm stop vm_01
+
+"
     exit 2
   fi
 
   stop_fn "$@"
   ;;
 ssh)
-  if [ $# -lt 1 ]; then
-    printf "Usage:\n\tvm ssh <vmname>\n\n"
+  if [ $# -lt 2 ]; then
+    printf "Usage: vm ssh <vmname> [options]
+
+Examples:
+$ vm ssh vm_01
+
+$ vm ssh vm_01 -- cat /etc/passwd
+
+"
     exit 2
   fi
+
   ip=$(getvmip "$2")
   ssh "$vmuser@$ip" "${@:3}"
   ;;
 *)
-  printf "Usage:\n\tvm (ls | ps | create | rm | start | stop | ssh) [options]\n\n"
+  printf "Usage: vm <command> [options]
+Create, control and connect to VirtualBox VM instances.
+
+Available commands:
+  ls        List all created VMs
+  ps        List all running VMs
+  create    Create a VM from OVA file
+  start     Start one or more VMs
+  ssh       ssh into a running VM, the VM shoud be started first
+  stop      Stop one or more VMs
+  rm        Remove one or more VMs
+"
   exit 2
   ;;
 esac
