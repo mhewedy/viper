@@ -22,7 +22,7 @@ const max = 255
 func main() {
 	flag.Parse()
 	if len(flag.Args()) < 1 {
-		fmt.Println("usage: vmip <vmName> [--purge]")
+		fmt.Println("Usage: vmip <vmName> [--purge]")
 		os.Exit(-1)
 	}
 
