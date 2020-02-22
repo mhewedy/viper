@@ -5,7 +5,6 @@
 
 # default user and password to the vm
 vmuser="mhewedy"
-vmpassword="password"
 
 # --- start of util functions
 
@@ -23,15 +22,9 @@ getvmip() {
 create_fn() {
   next=$(($(vboxmanage list vms | sort | tail -n 1 | cut -d " " -f1 | cut -d "\"" -f2 | cut -d "_" -f2) + 1))
   vmname="vm_$(printf %02d $next)"
-  vboxmanage import "$2" --vsys 0 --vmname "$vmname"
-  #  vmname="vm_01"
-  #
-  #  if [ "$#" -gt 2 ]; then
-  #    script=$3
-  #    echo "executing script $script"
-  #    ip=$(getvmip "$vmname")
-  #    ssh -t "$vmuser@$ip" "sudo mkdir /testme"# < "$script"
-  #  fi
+  vmbasedir="$HOME/.vms"
+  mkdir -p "$vmbasedir"
+  vboxmanage import "$2" --vsys 0 --vmname "$vmname" --basefolder "$vmbasedir" --cpus 1 --memory 1024
 }
 
 rm_fn() {
