@@ -114,7 +114,7 @@ func formatMACAddr(mac string) string {
 
 func getArpTable() []addr {
 	var stdout bytes.Buffer
-	cmd := exec.Command("arp", "-a")
+	cmd := exec.Command("arp", "-an")
 	cmd.Stdout = &stdout
 
 	_ = cmd.Run()
