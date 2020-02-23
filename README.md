@@ -22,6 +22,12 @@ Tested on:
 ## Installation
 Download or clone the repository and run `./build.sh`
 
+```bash
+$ git clone https://github.com/mhewedy/vm.git
+$ cd vm
+$ ./build
+```
+
 ## Usage:
 
 ### Create a new VM
