@@ -6,11 +6,6 @@ Tested on:
  * **macos** (*zsh*)
  * **ubuntu** (*zsh*, *bash*)
 ----
-  * [Prerequisites](#prerequisites)
-  * [Installation](#installation)
-  * [Usage](#usage)
-  * [Why not Vagrant](#why-not-vagrant)
-  * [FAQs](#faqs)
 
 ## Prerequisites
 * [VirtualBox ](https://www.virtualbox.org/wiki/Downloads)
