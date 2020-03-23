@@ -24,7 +24,7 @@ create_fn() {
   vmname="vm_$(printf %02d $next)"
   vmbasedir="$HOME/.vms"
   mkdir -p "$vmbasedir"
-  vboxmanage import "$2" --vsys 0 --vmname "$vmname" --basefolder "$vmbasedir" --cpus 1 --memory 1024 &>"$vmbasedir/log.out"
+  vboxmanage import "$2" --vsys 0 --vmname "$vmname" --basefolder "$vmbasedir" --cpus 2 --memory 1024 &>"$vmbasedir/log.out"
 
   if [ "$#" -gt 2 ]; then
     script=$3
