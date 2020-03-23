@@ -24,16 +24,19 @@ create_fn() {
   vmname="vm_$(printf %02d $next)"
   vmbasedir="$HOME/.vms"
   mkdir -p "$vmbasedir"
-  vboxmanage import "$2" --vsys 0 --vmname "$vmname" --basefolder "$vmbasedir" --cpus 1 --memory 1024 &>log.out
+  vboxmanage import "$2" --vsys 0 --vmname "$vmname" --basefolder "$vmbasedir" --cpus 1 --memory 1024 &>"$vmbasedir/log.out"
 
   if [ "$#" -gt 2 ]; then
     script=$3
+    rscript=$(basename "$script")
+
     echo "Provisioning $vmname..."
-    vboxmanage startvm "$vmname" --type headless >log.out
+
+    vboxmanage startvm "$vmname" --type headless >"$vmbasedir/log.out"
     ip=$(getvmip "$vmname")
-    scp "$script" "$vmuser@$ip:/tmp/" >log.out
-    ssh "$vmuser@$ip" -- chmod +x "/tmp/$script"
-    ssh "$vmuser@$ip" -- sudo "/tmp/$script"
+    scp "$script" "$vmuser@$ip:/tmp/$rscript" >"$vmbasedir/log.out"
+    ssh "$vmuser@$ip" -- chmod +x "/tmp/$rscript"
+    ssh "$vmuser@$ip" -- sudo "/tmp/$rscript"
   fi
 }
 
@@ -72,10 +75,10 @@ ps) # vm ps
   ;;
 create)
   if [ $# -lt 2 ]; then
-    printf "Usage: vm create <path/to/image.ova>
+    printf "Usage: vm create <path/to/image.ova> [/path/to/provision_script.sh]
 
 Examples:
-$ vm create ~/work/VMS/ubuntu.ova
+$ vm create ~/work/VM/ubuntu.ova
 
 "
     exit 2
