@@ -28,16 +28,33 @@ echo "net.bridge.bridge-nf-call-iptables=1" | sudo tee -a /etc/sysctl.conf
 
 sudo sysctl -p
 
-### 
+###
 
-sudo kubeadm init --pod-network-cidr=10.244.0.0/16 > ~/kubeadm.log
+sudo kubeadm init --pod-network-cidr=10.244.0.0/16 &> ~/kubeadm.log
 
 mkdir -p $HOME/.kube
 
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 
-sudo chown $(id -u):$(id -g) $HOME/.kube/config
+sudo chown "$(id -u):$(id -g)" $HOME/.kube/config
 
 kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/bc79dd1505b0c8681ece4de4c0d86c5cd2643275/Documentation/kube-flannel.yml
 
 
+#####
+
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys CC86BB64
+sudo add-apt-repository ppa:rmescandon/yq
+sudo apt update
+sudo apt install yq -y
+
+sudo yq w -i /etc/netplan/50-cloud-init.yaml network.ethernets.enp0s3.dhcp4 false
+sudo yq w -i /etc/netplan/50-cloud-init.yaml network.ethernets.enp0s3.addresses[+] "$(hostname -I | awk '{print $1}')/24"
+sudo yq w -i /etc/netplan/50-cloud-init.yaml network.ethernets.enp0s3.gateway4 192.168.1.1
+sudo yq w -i /etc/netplan/50-cloud-init.yaml network.ethernets.enp0s3.nameservers.addresses[+] 8.8.8.8
+sudo yq w -i /etc/netplan/50-cloud-init.yaml network.ethernets.enp0s3.nameservers.addresses[+] 8.8.4.4
+
+sudo netplan apply
+
+#####
+sudo hostnamectl set-hostname "$(hostname -I | awk '{print $1}')"
