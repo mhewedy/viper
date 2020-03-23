@@ -24,7 +24,17 @@ create_fn() {
   vmname="vm_$(printf %02d $next)"
   vmbasedir="$HOME/.vms"
   mkdir -p "$vmbasedir"
-  vboxmanage import "$2" --vsys 0 --vmname "$vmname" --basefolder "$vmbasedir" --cpus 1 --memory 1024
+  vboxmanage import "$2" --vsys 0 --vmname "$vmname" --basefolder "$vmbasedir" --cpus 1 --memory 1024 &>log.out
+
+  if [ "$#" -gt 2 ]; then
+    script=$3
+    echo "Provisioning $vmname..."
+    vboxmanage startvm "$vmname" --type headless >log.out
+    ip=$(getvmip "$vmname")
+    scp "$script" "$vmuser@$ip:/tmp/" >log.out
+    ssh "$vmuser@$ip" -- chmod +x "/tmp/$script"
+    ssh "$vmuser@$ip" -- sudo "/tmp/$script"
+  fi
 }
 
 rm_fn() {
