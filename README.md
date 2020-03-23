@@ -31,7 +31,9 @@ The following steps need to do **once**:
 1. [Install Linux on VirtualBox](https://www.wikihow.com/Install-Ubuntu-on-VirtualBox)
 2. [Change network settings to *Bridge*](https://www.opentechguides.com/how-to/article/virtualbox/140/vm-virtualbox-networking.html)
 3. Install ssh server on the guest os (e.g. `openssh-server`) 
-4. *Optional* - You may need to login to the VM and do some customizations (customzie `PS1` to contains the IP of the VM, e.g. `PS1="\[\e[1;35m\]\u\[\033[m\]@\h-\[\e[1;92m\]$(hostname -I | awk '{print $1}')\[\033[m\]:\w \$ "` or execte `ssh-copy-id` command on host in order to use certificate authentication instead of password authentication)
+4. *Optional* - You may need to login to the VM and do some such as:
+   1. Execute `ssh-copy-id` command on host in order to use certificate authentication instead of password authentication
+   2. Execute `visudo` and add `mhewedy ALL=(ALL) NOPASSWD:ALL` to allow execute sudo commands without providing password
 5. [Export the VM as *OVA*](https://www.maketecheasier.com/import-export-ova-files-in-virtualbox/)
 
 Then each time you need to create a new VM execute the following command:
