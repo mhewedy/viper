@@ -6,21 +6,22 @@ Tested on:
  * **macos** (*zsh*)
  * **ubuntu** (*zsh*, *bash*)
 ----
-  * [Prerequisites](#prerequisites)
-  * [Installation](#installation)
-  * [Usage](#usage)
-  * [Why not Vagrant](#why-not-vagrant)
-  * [FAQs](#faqs)
 
 ## Prerequisites
 * [VirtualBox ](https://www.virtualbox.org/wiki/Downloads)
-* [Golang compiler](https://golang.org/dl/) >= v 1.13
+* [Golang compiler](https://golang.org/dl/) >= v 1.13 (TODO precompile the binary on the 3 major environment)
 * [zsh](https://github.com/ohmyzsh/ohmyzsh/wiki/Installing-ZSH) - Not a requirement, however the autocomplete will only works for zsh.
 
 > golang compiler needed to create `vmip` executable, which is used to find the IP address of particular VM. (used by the vm script)
 
 ## Installation
 Download or clone the repository and run `./build.sh`
+
+```bash
+$ git clone https://github.com/mhewedy/vm.git
+$ cd vm
+$ ./build
+```
 
 ## Usage:
 
@@ -29,8 +30,9 @@ Download or clone the repository and run `./build.sh`
 The following steps need to do **once**:
 1. [Install Linux on VirtualBox](https://www.wikihow.com/Install-Ubuntu-on-VirtualBox)
 2. [Change network settings to *Bridge*](https://www.opentechguides.com/how-to/article/virtualbox/140/vm-virtualbox-networking.html)
-3. *Optional* - You may need to login to the VM and do some customizations (customzie `PS1` to contains the IP of the VM, e.g. `PS1="\[\e[1;35m\]\u\[\033[m\]@\h-\[\e[1;92m\]$(hostname -I | awk '{print $1}')\[\033[m\]:\w \$ "` or execte `ssh-copy-id` command on host in order to use certificate authentication instead of password authentication)
-4. [Export the VM as *OVA*](https://www.maketecheasier.com/import-export-ova-files-in-virtualbox/)
+3. Install ssh server on the guest os (e.g. `openssh-server`) 
+4. *Optional* - You may need to login to the VM and do some customizations (customzie `PS1` to contains the IP of the VM, e.g. `PS1="\[\e[1;35m\]\u\[\033[m\]@\h-\[\e[1;92m\]$(hostname -I | awk '{print $1}')\[\033[m\]:\w \$ "` or execte `ssh-copy-id` command on host in order to use certificate authentication instead of password authentication)
+5. [Export the VM as *OVA*](https://www.maketecheasier.com/import-export-ova-files-in-virtualbox/)
 
 Then each time you need to create a new VM execute the following command:
 ```
