@@ -89,8 +89,4 @@ $ vm rm vm_03
 ## Why not Vagrant:
 
 Vagrant is greate, but I wanted very simple script to control my local VMs.   
-Vagrant is very powerful in provisioning part, but mostly I don't need such feature, moreover I don't want to mantain such `VagrantFile` and I see the concept of local vs global boxes is not suited to my case.
-
-## FAQs
-* `ssh: connect to host 192.168.1.26 port 22: Operation timed out.`        
- This is usually because the VM ip address has been changed, use `vmip <vm-name> --purge` then `vm ssh <vm-name>`
+Vagrant uses a Vagrantfile, and I think - in my case - it is a head to maintain such file for each vm I want to create.
