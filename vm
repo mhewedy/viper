@@ -23,11 +23,11 @@ establish_ssh() {
   vmname=$1
   # try first the nice way that waits until ip is assigned
   ip=$(getvmip "$vmname")
-  ssh "$vmuser@$ip" -- ls
+  ssh "$vmuser@$ip" -- ls &>/dev/null
   while [ $? -ne 0 ]; do
     # try the hard way if the assigned ip is invalid
     ip=$(vmip "$vmname" --purge)
-    ssh "$vmuser@$ip" -- ls
+    ssh "$vmuser@$ip" -- ls &>/dev/null
   done
 }
 
@@ -151,6 +151,8 @@ $ vm ssh vm_01 -- cat /etc/passwd
 "
     exit 2
   fi
+
+  establish_ssh "$2"
 
   ip=$(getvmip "$2")
   ssh "$vmuser@$ip" "${@:3}"
