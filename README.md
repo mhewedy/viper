@@ -40,6 +40,10 @@ Then each time you need to create a new VM execute the following command:
 ```
 $ vm create /path/to/exported.ova
 ```
+Or in case of provisioner (see samples folder for sample provision scripts)
+```
+$ vm create /path/to/exported.ova /path/to/provison.sh 
+```
 
 ### List all created VMs
 This subcommand list all created VMs (stopped and running)
