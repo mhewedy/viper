@@ -1,5 +1,5 @@
 sudo hostnamectl set-hostname "$(hostname -I | awk '{print $1}')"
-swapoff -a && sed -i '/ swap / s/^/#/' /etc/fstab
+sudo swapoff -a && sudo sed -i '/ swap / s/^/#/' /etc/fstab
 
 ####
 

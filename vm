@@ -18,6 +18,19 @@ getvmip() {
   done
 }
 
+# make sure connection to vm is established and valid ip is retruned
+establish_ssh() {
+  vmname=$1
+  # try first the nice way that waits until ip is assigned
+  ip=$(getvmip "$vmname")
+  ssh "$vmuser@$ip" -- ls
+  while [ $? -ne 0 ]; do
+    # try the hard way if the assigned ip is invalid
+    ip=$(vmip "$vmname" --purge)
+    ssh "$vmuser@$ip" -- ls
+  done
+}
+
 # -- start of case functions
 create_fn() {
   next=$(($(vboxmanage list vms | sort | tail -n 1 | cut -d " " -f1 | cut -d "\"" -f2 | cut -d "_" -f2) + 1))
@@ -33,10 +46,12 @@ create_fn() {
     echo "Provisioning $vmname..."
 
     vboxmanage startvm "$vmname" --type headless >"$vmbasedir/log.out"
+
+    establish_ssh "$vmname"
     ip=$(getvmip "$vmname")
     scp "$script" "$vmuser@$ip:/tmp/$rscript" >"$vmbasedir/log.out"
     ssh "$vmuser@$ip" -- chmod +x "/tmp/$rscript"
-    ssh "$vmuser@$ip" -- sudo "/tmp/$rscript"
+    ssh "$vmuser@$ip" -- "/tmp/$rscript"
   fi
 }
 
@@ -75,10 +90,10 @@ ps) # vm ps
   ;;
 create)
   if [ $# -lt 2 ]; then
-    printf "Usage: vm create <path/to/image.ova> [/path/to/provision_script.sh]
+    printf "Usage: vm create <path/to/image.ova|image.ovf> [/path/to/provision_script.sh]
 
 Examples:
-$ vm create ~/work/VM/ubuntu.ova
+$ vm create ~/work/vm/ubuntu.ova
 
 "
     exit 2
