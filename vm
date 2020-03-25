@@ -4,7 +4,7 @@
 # however I think it works in other settings as well.
 
 # default user and password to the vm
-vmuser="mhewedy"
+vmuser="vm_user"
 
 # --- start of util functions
 
@@ -38,12 +38,13 @@ create_fn() {
   vmbasedir="$HOME/.vms"
   mkdir -p "$vmbasedir"
   vboxmanage import "$2" --vsys 0 --vmname "$vmname" --basefolder "$vmbasedir" --cpus 1 --memory 1024 &>"$vmbasedir/log.out"
+  echo "vm created: $vmname"
 
   if [ "$#" -gt 2 ]; then
     script=$3
     rscript=$(basename "$script")
 
-    echo "Provisioning $vmname..."
+    echo "provisioning $vmname..."
 
     vboxmanage startvm "$vmname" --type headless >"$vmbasedir/log.out"
 

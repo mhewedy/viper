@@ -28,12 +28,12 @@ $ ./build
 ### Create a new VM
 
 The following steps need to do **once**:
-1. [Install Linux on VirtualBox](https://www.wikihow.com/Install-Ubuntu-on-VirtualBox)
+1. [Install Linux on VirtualBox](https://www.wikihow.com/Install-Ubuntu-on-VirtualBox) (make sure to have a user with name vm_user)
 2. [Change network settings to *Bridge*](https://www.opentechguides.com/how-to/article/virtualbox/140/vm-virtualbox-networking.html)
 3. Install ssh server on the guest os (e.g. `openssh-server`) 
 4. *Optional* - You may need to login to the VM and do some actions such as:
    1. Execute `ssh-copy-id` command on host in order to use certificate authentication instead of password authentication
-   2. Execute `visudo` and add `mhewedy ALL=(ALL) NOPASSWD:ALL` to allow execute sudo commands without providing password (required for provisioner to work)
+   2. Execute `visudo` and add `vm_user ALL=(ALL) NOPASSWD:ALL` to allow execute sudo commands without providing password (required for provisioner to work)
 5. [Export the VM as *OVA*](https://www.maketecheasier.com/import-export-ova-files-in-virtualbox/)
 
 Then each time you need to create a new VM execute the following command:
@@ -69,7 +69,7 @@ $ vm start vm_01 vm_02
 
 
 ### ssh into a VM
-> This assumes that, there's a user with name `mhewedy` already created in the operation system (Linux 😉) installed on the VM
+> This assumes that, there's a user with name `vm_user` already created in the operation system (Linux 😉) installed on the VM
 
 ```
 $ vm ssh vm_03
