@@ -28,7 +28,7 @@ $ ./build
 ### Create a new VM
 
 The following steps need to do **once**:
-1. [Install Linux on VirtualBox](https://www.wikihow.com/Install-Ubuntu-on-VirtualBox) (make sure to have a user with name vm_user)
+1. [Install Linux on VirtualBox](https://www.wikihow.com/Install-Ubuntu-on-VirtualBox) (make sure to have a user named `vm_user` with any password of choice)
 2. [Change network settings to *Bridge*](https://www.opentechguides.com/how-to/article/virtualbox/140/vm-virtualbox-networking.html)
 3. Install ssh server on the guest os (e.g. `openssh-server`) 
 4. *Optional* - You may need to login to the VM and do some actions such as:
