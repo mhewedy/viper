@@ -50,7 +50,7 @@ create_fn() {
 
     establish_ssh "$vmname"
     ip=$(getvmip "$vmname")
-    scp "$script" "$vmuser@$ip:/tmp/$rscript" >"$vmbasedir/log.out"
+    scp -i ~/.ssh/vm_rsa "$script" "$vmuser@$ip:/tmp/$rscript" >"$vmbasedir/log.out"
     ssh -i ~/.ssh/vm_rsa "$vmuser@$ip" -- chmod +x "/tmp/$rscript"
     ssh -i ~/.ssh/vm_rsa "$vmuser@$ip" -- "/tmp/$rscript"
   fi
