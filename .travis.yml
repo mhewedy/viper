@@ -1,0 +1,28 @@
+language: go
+
+go:
+  - 1.13.x
+
+before_deploy:
+  - |
+    mkdir vm-${TRAVIS_TAG}.linux
+    cp -rf {samples,keys,install.sh,vm,zsh-autocompletion.sh} vm-${TRAVIS_TAG}.linux
+    cd vmip && GOOS=linux GOARCH=amd64 go build -o ../vm-${TRAVIS_TAG}.linux/vmip && cd ..
+    tar czf vm-${TRAVIS_TAG}.linux.tar.gz vm-${TRAVIS_TAG}.linux/*
+    rm -rf vm-${TRAVIS_TAG}.linux
+  - |
+    mkdir vm-${TRAVIS_TAG}.darwin
+    cp -rf {samples,keys,install.sh,vm,zsh-autocompletion.sh} vm-${TRAVIS_TAG}.darwin
+    cd vmip && GOOS=darwin GOARCH=amd64 go build -o ../vm-${TRAVIS_TAG}.darwin/vmip && cd ..
+    tar czf vm-${TRAVIS_TAG}.darwin.tar.gz vm-${TRAVIS_TAG}.darwin/*
+    rm -rf vm-${TRAVIS_TAG}.darwin
+
+deploy:
+  provider: releases
+  api_key: ${GITHUB_API_KEY}
+  file:
+    - "vm-${TRAVIS_TAG}.linux.tar.gz"
+    - "vm-${TRAVIS_TAG}.darwin.tar.gz"
+  skip_cleanup: true
+  on:
+    tags: true
