@@ -23,11 +23,11 @@ establish_ssh() {
   vmname=$1
   # try first the nice way that waits until ip is assigned
   ip=$(getvmip "$vmname")
-  ssh "$vmuser@$ip" -- ls &>/dev/null
+  ssh -i ~/.ssh/vm_rsa "$vmuser@$ip" -- ls &>/dev/null
   while [ $? -ne 0 ]; do
     # try the hard way if the assigned ip is invalid
     ip=$(vmip "$vmname" --purge)
-    ssh "$vmuser@$ip" -- ls &>/dev/null
+    ssh -i ~/.ssh/vm_rsa "$vmuser@$ip" -- ls &>/dev/null
   done
 }
 
@@ -51,8 +51,8 @@ create_fn() {
     establish_ssh "$vmname"
     ip=$(getvmip "$vmname")
     scp "$script" "$vmuser@$ip:/tmp/$rscript" >"$vmbasedir/log.out"
-    ssh "$vmuser@$ip" -- chmod +x "/tmp/$rscript"
-    ssh "$vmuser@$ip" -- "/tmp/$rscript"
+    ssh -i ~/.ssh/vm_rsa "$vmuser@$ip" -- chmod +x "/tmp/$rscript"
+    ssh -i ~/.ssh/vm_rsa "$vmuser@$ip" -- "/tmp/$rscript"
   fi
 }
 
@@ -156,7 +156,7 @@ $ vm ssh vm_01 -- cat /etc/passwd
   establish_ssh "$2"
 
   ip=$(getvmip "$2")
-  ssh "$vmuser@$ip" "${@:3}"
+  ssh -i ~/.ssh/vm_rsa "$vmuser@$ip" "${@:3}"
   ;;
 *)
   printf "Usage: vm <command> [options]
