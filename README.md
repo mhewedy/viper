@@ -77,5 +77,5 @@ $ vm rm vm_03
 
 ## Why not Vagrant:
 
-Vagrant is greate, but I wanted very simple script to control my local VMs.   
-Vagrant uses a Vagrantfile, and I think - in my case - it is a head to maintain such file for each vm I want to create.
+Vagrant is great, but I wanted very simple script to control my local VMs.   
+Vagrant uses a Vagrantfile, and I think - in my case - it is an overhead to maintain such file for each vm I want to create.
