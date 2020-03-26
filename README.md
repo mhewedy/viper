@@ -10,7 +10,7 @@ Group of scripts/programs to help manage VirtualBox vms (for Mac and Linux)
 * [zsh](https://github.com/ohmyzsh/ohmyzsh/wiki/Installing-ZSH): Optional - autocomplete works only on zsh.
 
 ## Installation
-[Download latest release](https://github.com/mhewedy/vm/releases/latest) extrac the archive then run `./install.sh`
+[Download latest release](https://github.com/mhewedy/vm/releases/latest), extract the archive then run `./install.sh`
 
 ## Usage:
 
