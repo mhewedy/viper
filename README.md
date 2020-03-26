@@ -1,27 +1,16 @@
 # vm
 VirtualBox manager wrapper
 
-Group of scripts/programs to help manage VirtualBox vms    
-Tested on:
- * **macos** (*zsh*)
- * **ubuntu** (*zsh*, *bash*)
+Group of scripts/programs to help manage VirtualBox vms (for Mac and Linux)
+
 ----
 
 ## Prerequisites
-* [VirtualBox ](https://www.virtualbox.org/wiki/Downloads)
-* [Golang compiler](https://golang.org/dl/) >= v 1.13 (TODO precompile the binary on the 3 major environment)
-* [zsh](https://github.com/ohmyzsh/ohmyzsh/wiki/Installing-ZSH) - Not a requirement, however the autocomplete will only works for zsh.
-
-> golang compiler needed to create `vmip` executable, which is used to find the IP address of particular VM. (used by the vm script)
+* [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
+* [zsh](https://github.com/ohmyzsh/ohmyzsh/wiki/Installing-ZSH): Optional - autocomplete works only on zsh.
 
 ## Installation
-Download or clone the repository and run `./build.sh`
-
-```bash
-$ git clone https://github.com/mhewedy/vm.git
-$ cd vm
-$ ./build
-```
+[Download latest release](https://github.com/mhewedy/vm/releases/latest) extrac the archive then run `./install.sh`
 
 ## Usage:
 
