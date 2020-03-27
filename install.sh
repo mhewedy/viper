@@ -6,12 +6,16 @@ mkdir -p $HOME/.vms
 
 cp vm $HOME/bin
 cp vmip $HOME/bin
+cp imagelist $HOME/bin
 cp complete/zsh.sh $HOME/.vms/complete-zsh.sh
 
 # copy ssh key
 mkdir -p $HOME/.ssh
 cp -rf keys/vm_rsa $HOME/.ssh
 chmod 600 $HOME/.ssh/vm_rsa
+
+# prepare boxes
+mkdir -p $HOME/.vms/boxes/
 
 # modify shell rc files
 if [ -f $HOME/.zshrc ] && [ ! -f $HOME/.vms/srcd ]; then

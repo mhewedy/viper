@@ -8,12 +8,14 @@ before_deploy:
     mkdir vm-${TRAVIS_TAG}.linux
     cp -rf {samples,keys,install.sh,vm,complete} vm-${TRAVIS_TAG}.linux
     cd vmip && GOOS=linux GOARCH=amd64 go build -o ../vm-${TRAVIS_TAG}.linux/vmip && cd ..
+    cd imagelist && GOOS=linux GOARCH=amd64 go build -o ../vm-${TRAVIS_TAG}.linux/imagelist && cd ..
     tar czf vm-${TRAVIS_TAG}.linux.tar.gz vm-${TRAVIS_TAG}.linux/*
     rm -rf vm-${TRAVIS_TAG}.linux
   - |
     mkdir vm-${TRAVIS_TAG}.darwin
     cp -rf {samples,keys,install.sh,vm,complete} vm-${TRAVIS_TAG}.darwin
     cd vmip && GOOS=darwin GOARCH=amd64 go build -o ../vm-${TRAVIS_TAG}.darwin/vmip && cd ..
+    cd imagelist && GOOS=darwin GOARCH=amd64 go build -o ../vm-${TRAVIS_TAG}.darwin/imagelist && cd ..
     tar czf vm-${TRAVIS_TAG}.darwin.tar.gz vm-${TRAVIS_TAG}.darwin/*
     rm -rf vm-${TRAVIS_TAG}.darwin
 

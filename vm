@@ -36,8 +36,10 @@ create_fn() {
   next=$(($(vboxmanage list vms | sort | tail -n 1 | cut -d " " -f1 | cut -d "\"" -f2 | cut -d "_" -f2) + 1))
   vmname="vm_$(printf %02d $next)"
   vmbasedir="$HOME/.vms"
+  imagename=$2
+
   mkdir -p "$vmbasedir"
-  vboxmanage import "$2" --vsys 0 --vmname "$vmname" --basefolder "$vmbasedir" --cpus 1 --memory 1024 &>"$vmbasedir/log.out"
+  vboxmanage import "$HOME/.vms/boxes/${imagename}.ova" --vsys 0 --vmname "$vmname" --basefolder "$vmbasedir" --cpus 1 --memory 1024 >"$vmbasedir/log.out"
   echo "vm created: $vmname"
 
   if [ "$#" -gt 2 ]; then
@@ -91,10 +93,15 @@ ps) # vm ps
   ;;
 create)
   if [ $# -lt 2 ]; then
-    printf "Usage: vm create <path/to/image.ova|image.ovf> [/path/to/provision_script.sh]
+    printf "Usage: vm create <image> [/path/to/provision_script.sh]
+
+where:
+<image> = <distro name>/<distro version>
 
 Examples:
-$ vm create ~/work/vm/ubuntu.ova
+$ vm create ubuntu/bionic
+
+Use the command \"imagelist\" to list all vm images avaiable
 
 "
     exit 2

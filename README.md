@@ -24,15 +24,23 @@ The following steps need to do **once**:
    1. Execute the command`visudo` and add `vm_user ALL=(ALL) NOPASSWD:ALL` to allow execute sudo commands without providing password (required for provisioner to work)
    2. Copy the content of [vm_rsa.pub](https://raw.githubusercontent.com/mhewedy/vm/master/keys/vm_rsa.pub) to the VM as the file `$HOME/.ssh/authorized_keys`
 5. [Export the VM as *OVA*](https://www.maketecheasier.com/import-export-ova-files-in-virtualbox/)
+6. Move the exported image under `$HOME/.vms/boxes/<distro name>/<distro version>.ova`, 
+for example in case of ubuntu 18.04, move the exported ova file to `$HOME/.vms/boxes/ubuntu/bionic.ova`
 
 Then each time you need to create a new VM execute the following command:
 ```
-$ vm create /path/to/exported.ova
+$ vm create <distro name>/<distro version>
+# example
+$ vm create ubuntu/bionic
 ```
 Or in case of provisioner (see samples folder for sample provision scripts)
 ```
-$ vm create /path/to/exported.ova /path/to/provison.sh 
+$ vm create <distro name>/<distro version> /path/to/provison.sh 
+# example
+$ vm create ubuntu/bionic ~/init.sh
 ```
+
+> Note: To get list of all local available images use `imagelist`
 
 ### List all created VMs
 This subcommand list all created VMs (stopped and running)
