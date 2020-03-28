@@ -94,15 +94,11 @@ ps) # vm ps
 create)
   if [ $# -lt 2 ]; then
     printf "Usage: vm create <image> [/path/to/provision_script.sh]
-
-where:
+\nWhere:
 <image> = <distro name>/<distro version>
-
-Examples:
+\nExamples:
 $ vm create ubuntu/bionic
-
-Use the command \"imagelist\" to list all vm images avaiable
-
+\nUse the command \"imagelist\" to list all vm images avaiable
 "
     exit 2
   fi
@@ -111,10 +107,8 @@ Use the command \"imagelist\" to list all vm images avaiable
 rm)
   if [ $# -eq 1 ]; then
     printf "Usage: vm rm <vmname1> [,vmname2, ...]
-
-Examples:
+\nExamples:
 $ vm rm vm_01
-
 "
     exit 2
   fi
@@ -124,10 +118,8 @@ $ vm rm vm_01
 start)
   if [ $# -eq 1 ]; then
     printf "Usage: vm start <vmname1> [,vmname2, ...]
-
-Examples:
+\nExamples:
 $ vm start vm_01
-
 "
     exit 2
   fi
@@ -137,10 +129,8 @@ $ vm start vm_01
 stop)
   if [ $# -eq 1 ]; then
     printf "Usage: vm stop <vmname1> [,vmname2, ...]
-
-Examples:
+\nExamples:
 $ vm stop vm_01
-
 "
     exit 2
   fi
@@ -150,12 +140,9 @@ $ vm stop vm_01
 ssh)
   if [ $# -lt 2 ]; then
     printf "Usage: vm ssh <vmname> [options]
-
-Examples:
+\nExamples:
 $ vm ssh vm_01
-
-$ vm ssh vm_01 -- cat /etc/passwd
-
+\n$ vm ssh vm_01 -- cat /etc/passwd
 "
     exit 2
   fi
@@ -168,14 +155,11 @@ $ vm ssh vm_01 -- cat /etc/passwd
 forward)
   if [ $# -lt 3 ]; then
     printf "Usage: vm forward <vmname> <vm port> [local port]
-
-Examples:
+\nExamples:
 # forward vm port 4040 to local port 4040
 $ vm forward vm_01 4040
-
-# forward vm port 4040 to local port 40040
+\n# forward vm port 4040 to local port 40040
 $ vm forward vm_01 4040 40040
-
 "
     exit 2
   fi
@@ -189,14 +173,12 @@ $ vm forward vm_01 4040 40040
 
   ssh -i ~/.ssh/vm_rsa -L $local_port:localhost:$vm_port "$vmuser@$ip" -N
   ;;
-scp)
+cp)
   if [ $# -lt 3 ]; then
-    printf "Usage: vm scp <vmname> <local file>
-
-Examples:
-# copy file local file file.txt to /tmp directory at the vm machine
-$ vm scp vm_01 file.txt
-
+    printf "Usage: vm cp <vmname> <local file>
+\nExamples:
+# copy file.txt from host to /tmp directory on the vm
+$ vm cp vm_01 file.txt
 "
     exit 2
   fi
@@ -212,8 +194,7 @@ $ vm scp vm_01 file.txt
 *)
   printf "Usage: vm <command> [options]
 Create, control and connect to VirtualBox VM instances.
-
-Available commands:
+\nAvailable commands:
   ls        List all created VMs
   ps        List all running VMs
   create    Create a VM from OVA file
@@ -221,8 +202,8 @@ Available commands:
   ssh       ssh into a running VM
   stop      Stop one or more VMs
   rm        Remove one or more VMs
-  forward   Port forward
-  scp       Secure Copy
+  forward   Forward port from VM to local host
+  cp        Copy files to VM from local host
 "
   exit 2
   ;;
