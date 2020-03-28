@@ -176,8 +176,9 @@ $ vm forward vm_01 4040 40040
 cp)
   if [ $# -lt 3 ]; then
     printf "Usage: vm cp <vmname> <local file>
+\nCopy local files to home directory the vm
 \nExamples:
-# copy file.txt from host to /tmp directory on the vm
+# copy file.txt from host to home directory on the vm
 $ vm cp vm_01 file.txt
 "
     exit 2
@@ -189,7 +190,7 @@ $ vm cp vm_01 file.txt
 
   establish_ssh "$vm_name"
 
-  scp -i ~/.ssh/vm_rsa $local_file $vmuser@$ip:/tmp/$local_file
+  scp -i ~/.ssh/vm_rsa $local_file $vmuser@$ip:/home/$vmuser/$local_file
   ;;
 *)
   printf "Usage: vm <command> [options]
@@ -203,7 +204,7 @@ Create, control and connect to VirtualBox VM instances.
   stop      Stop one or more VMs
   rm        Remove one or more VMs
   forward   Forward port from VM to local host
-  cp        Copy files to VM from local host
+  cp        Copy files from host to VM
 "
   exit 2
   ;;
