@@ -171,6 +171,7 @@ $ vm forward vm_01 4040 40040
 
   establish_ssh "$vm_name"
 
+  printf "\nConnected. Press CTRL+C anytime to exit\n"
   ssh -i ~/.ssh/vm_rsa -L $local_port:localhost:$vm_port "$vmuser@$ip" -N
   ;;
 cp)
