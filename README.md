@@ -43,7 +43,7 @@ The following steps need to do **once**:
 6. Move the exported image under `$HOME/.vms/boxes/<distro name>/<distro version>.ova`, 
 for example in case of ubuntu 18.04, move the exported ova file to `$HOME/.vms/boxes/ubuntu/bionic.ova`
 
-Then each time you need to create a new VM execute the following command:
+*Then each time you need to create a new VM execute the following command:*
 ```
 $ vm create <distro name>/<distro version>
 # example
