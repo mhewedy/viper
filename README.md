@@ -21,10 +21,10 @@ Available commands:
   ls        List all created VMs
   ps        List all running VMs
   create    Create a VM from OVA file
-  start     Start one or more VMs
-  ssh       ssh into a running VM
-  stop      Stop one or more VMs
   rm        Remove one or more VMs
+  start     Start one or more VMs
+  stop      Stop one or more VMs
+  ssh       ssh into a running VM
   forward   Forward port from VM to host
   cp        Copy files from host to VM
 
