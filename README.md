@@ -13,6 +13,23 @@ Group of scripts/programs to help manage VirtualBox vms (for Mac and Linux)
 
 ## Usage:
 
+```bash
+Usage: vm <command> [options]
+Create, control and connect to VirtualBox VM instances.
+
+Available commands:
+  ls        List all created VMs
+  ps        List all running VMs
+  create    Create a VM from OVA file
+  start     Start one or more VMs
+  ssh       ssh into a running VM
+  stop      Stop one or more VMs
+  rm        Remove one or more VMs
+  forward   Forward port from VM to host
+  cp        Copy files from host to VM
+
+```
+
 ### Create a new VM
 
 The following steps need to do **once**:
