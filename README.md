@@ -13,6 +13,23 @@ Group of scripts/programs to help manage VirtualBox vms (for Mac and Linux)
 
 ## Usage:
 
+```bash
+Usage: vm <command> [options]
+Create, control and connect to VirtualBox VM instances.
+
+Available commands:
+  ls        List all created VMs
+  ps        List all running VMs
+  create    Create a VM from OVA file
+  rm        Remove one or more VMs
+  start     Start one or more VMs
+  stop      Stop one or more VMs
+  ssh       ssh into a running VM
+  forward   Forward port from VM to host
+  cp        Copy files from host to VM
+
+```
+
 ### Create a new VM
 
 The following steps need to do **once**:
@@ -26,7 +43,7 @@ The following steps need to do **once**:
 6. Move the exported image under `$HOME/.vms/boxes/<distro name>/<distro version>.ova`, 
 for example in case of ubuntu 18.04, move the exported ova file to `$HOME/.vms/boxes/ubuntu/bionic.ova`
 
-Then each time you need to create a new VM execute the following command:
+*Then each time you need to create a new VM execute the following command:*
 ```
 $ vm create <distro name>/<distro version>
 # example
