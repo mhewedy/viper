@@ -101,5 +101,5 @@ $ vm rm vm_03
 
 ## Why not Vagrant:
 
-Vagrant is great, but I wanted very simple script to control my local VMs.   
 Vagrant uses a Vagrantfile, and I think - in my case - it is an overhead to maintain such file for each vm I want to create.
+With Vagrantfile, it is most suitated to be source-controlled, but I usually created ad-hoc VMs to try things out. (build k8s cluster, install and work with apache Spark, etc... )
