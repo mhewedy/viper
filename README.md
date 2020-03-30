@@ -1,5 +1,6 @@
 # vm
-Simple VirtualBox manager wrapper (Group of scripts/programs to help manage VirtualBox vms - for Mac and Linux)
+### The smart Virtual Machines manager
+Group of scripts/programs to help manage VirtualBox vms - for Mac and Linux
 
 ----
 
