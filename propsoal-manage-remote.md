@@ -15,7 +15,7 @@ $ vm ls
 host/vm_name
 ```
 
-## Create:
+## Create Operation:
 * Before
 
 ```
