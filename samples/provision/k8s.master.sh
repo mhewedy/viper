@@ -3,7 +3,6 @@
 sudo hostnamectl set-hostname "$(hostname -I | awk '{print $1}')"
 sudo swapoff -a && sudo sed -i '/ swap / s/^/#/' /etc/fstab
 
-
 ## Fix IP Addr
 
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys CC86BB64
