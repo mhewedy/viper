@@ -1,4 +1,4 @@
-# Proposal to allow manage VMs on Remote hosts
+# Proposal to manage VMs on Remote hosts
 
 
 ## Read operations:
