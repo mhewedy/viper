@@ -139,7 +139,7 @@ $ vm stop vm_01
   ;;
 ssh)
   if [ $# -lt 2 ]; then
-    printf "Usage: vm ssh <vmname> [options]
+    printf "Usage: vm ssh <vmname> [-- remote commands]
 \nExamples:
 $ vm ssh vm_01
 \n$ vm ssh vm_01 -- cat /etc/passwd
@@ -179,7 +179,7 @@ cp)
     printf "Usage: vm cp <vmname> <local file>
 \nCopy local files to home directory the vm
 \nExamples:
-# copy file.txt from host to home directory on the vm
+# copy file.txt from host to user's home directory inside the vm
 $ vm cp vm_01 file.txt
 "
     exit 2
@@ -193,19 +193,38 @@ $ vm cp vm_01 file.txt
 
   scp -i ~/.ssh/vm_rsa $local_file $vmuser@$ip:/home/$vmuser/$local_file
   ;;
+images)
+  imagelist
+  ;;
+ip)
+  if [ $# -lt 2 ]; then
+    printf "Usage: vm ip <vmname> [--purge]
+\nExamples:
+$ vm ip vm_01
+\n#to purge the IP cache:
+$ vm ip vm_01 --purge
+"
+    exit 2
+  fi
+
+  vm_name="$2"
+  vmip $vm_name "$3"
+  ;;
 *)
   printf "Usage: vm <command> [options]
 Create, control and connect to VirtualBox VM instances.
 \nAvailable commands:
   ls        List all created VMs
   ps        List all running VMs
-  create    Create a VM from OVA file
+  create    Create a VM from VM image file - see \"images\" subcommand
   rm        Remove one or more VMs
   start     Start one or more VMs
   stop      Stop one or more VMs
   ssh       ssh into a running VM
   forward   Forward port from VM to host
   cp        Copy files from host to VM
+  images    List VM images (from OVA files)
+  ip        Show IP address for a running VM
 "
   exit 2
   ;;
