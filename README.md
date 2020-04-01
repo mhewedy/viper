@@ -1,7 +1,6 @@
 # vm
-VirtualBox manager wrapper
-
-Group of scripts/programs to help manage VirtualBox vms (for Mac and Linux)
+### The smart Virtual Machines manager
+Group of scripts/programs to help manage VirtualBox vms - for Mac and Linux
 
 ----
 
@@ -67,39 +66,32 @@ vm_02
 ```
 
 ### List all running VMs
-This subcommand list all running VMs
-
 ```
 $ vm ps
 vm_01
 ```
 
 ### Start one or more VMs
-
 ```
 $ vm start vm_01 vm_02
 ```
 
-
 ### ssh into a VM
-> This assumes that, there's a user with name `vm_user` already created in the operation system (Linux 😉) installed on the VM
-
 ```
 $ vm ssh vm_03
 ```
 
 ### Stop one or more VMs
-
 ```
 $ vm stop vm_03
 ```
 
 ### Remove one or more VMs
+Will stop and remove listed VMs
 ```
 $ vm rm vm_03
 ```
 
 ## Why not Vagrant:
 
-Vagrant is great, but I wanted very simple script to control my local VMs.   
-Vagrant uses a Vagrantfile, and I think - in my case - it is an overhead to maintain such file for each vm I want to create.
+* **Vagrant** uses a `Vagrantfile` which I think is most suitated to be source-controlled, and for my case it is an overhead to maintain such file for each vm I want to create. (like create k8s cluster, etc...), I want kind of global accessibility.
