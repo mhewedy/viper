@@ -28,8 +28,6 @@ Available commands:
   cp        Copy files from host to VM
   images    List VM images (from OVA files)
   ip        Show IP address for a running VM
-
-
 ```
 
 ### Create a new VM
