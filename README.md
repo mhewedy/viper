@@ -58,7 +58,7 @@ $ vm create <distro name>/<distro version> /path/to/provison.sh
 $ vm create ubuntu/bionic ~/init.sh
 ```
 
-> Note: To get list of all local available images use `imagelist`
+> Note: To get list of all local available images use `vm images`
 
 ### List all created VMs
 This subcommand list all created VMs (stopped and running)
