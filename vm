@@ -152,27 +152,31 @@ $ vm ssh vm_01
   ip=$(getvmip "$2")
   ssh -i ~/.ssh/vm_rsa "$vmuser@$ip" "${@:3}"
   ;;
-forward)
+port)
   if [ $# -lt 3 ]; then
-    printf "Usage: vm forward <vmname> <vm port> [local port]
+    printf "Usage: vm port <vmname> <vm port>[:local port] [<vm port>[:local port]]
 \nExamples:
 # forward vm port 4040 to local port 4040
-$ vm forward vm_01 4040
+$ vm port vm_01 4040
 \n# forward vm port 4040 to local port 40040
-$ vm forward vm_01 4040 40040
+$ vm port vm_01 4040:40040
+\n# forward vm port 4040 to local port 40040 and port 8080 to 8080
+$ vm port vm_01 4040:40040 8080
+\n# forward vm port 4040 to local port 40040 and ports in range (8080 to 8088) to range(8080 to 8088)
+$ vm port vm_01 4040:40040 8080-8088
+\n# forward vm port 4040 to local port 40040 and ports in range (8080 to 8088) to range(9080 to 9088)
+$ vm port vm_01 4040:40040 8080-8088:9080-9088
 "
     exit 2
   fi
 
   vm_name="$2"
-  vm_port="$3"
-  local_port=${4:-$vm_port}
   ip=$(getvmip "$vm_name")
-
+  ports="${*:3}"
   establish_ssh "$vm_name"
 
-  printf "\nConnected. Press CTRL+C anytime to exit\n"
-  ssh -i ~/.ssh/vm_rsa -L $local_port:localhost:$vm_port "$vmuser@$ip" -N
+  printf "\nConnected. Press CTRL+C anytime to stop\n"
+  ssh -i ~/.ssh/vm_rsa $(vmports $ports) "$vmuser@$ip" -N
   ;;
 cp)
   if [ $# -lt 3 ]; then
@@ -221,7 +225,7 @@ Create, control and connect to VirtualBox VM instances.
   start     Start one or more VMs
   stop      Stop one or more VMs
   ssh       ssh into a running VM
-  forward   Forward port from VM to host
+  port      Port forward from VM to host
   cp        Copy files from host to VM
   images    List VM images (from OVA files)
   ip        Show IP address for a running VM

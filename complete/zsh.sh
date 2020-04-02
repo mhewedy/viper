@@ -8,7 +8,7 @@ stoppedVms() {
 
 _vm() {
   local state
-  _arguments '1: :(ls ps create rm start stop ssh forward cp images ip)' '*: :->vms'
+  _arguments '1: :(ls ps create rm start stop ssh port cp images ip)' '*: :->vms'
 
   case $state in
   vms)
@@ -16,7 +16,7 @@ _vm() {
     create) _files ;;
     start) _describe 'command' "($(stoppedVms))" ;;
     rm) _describe 'command' "($(vm ls))" ;;
-    ssh | stop | forward | cp | ip) _describe 'command' "($(vm ps))" ;;
+    ssh | stop | port | cp | ip) _describe 'command' "($(vm ps))" ;;
     esac
     ;;
   esac

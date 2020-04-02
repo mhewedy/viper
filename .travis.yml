@@ -9,6 +9,7 @@ before_deploy:
     cp -rf {samples,keys,install.sh,vm,complete} vm-${TRAVIS_TAG}.linux
     cd vmip && GOOS=linux GOARCH=amd64 go build -o ../vm-${TRAVIS_TAG}.linux/vmip && cd ..
     cd imagelist && GOOS=linux GOARCH=amd64 go build -ldflags "-s" -o ../vm-${TRAVIS_TAG}.linux/imagelist && cd ..
+    cd vmports && GOOS=linux GOARCH=amd64 go build -ldflags "-s" -o ../vm-${TRAVIS_TAG}.linux/vmports && cd ..
     tar czf vm-${TRAVIS_TAG}.linux.tar.gz vm-${TRAVIS_TAG}.linux/*
     rm -rf vm-${TRAVIS_TAG}.linux
   - |
@@ -16,6 +17,7 @@ before_deploy:
     cp -rf {samples,keys,install.sh,vm,complete} vm-${TRAVIS_TAG}.darwin
     cd vmip && GOOS=darwin GOARCH=amd64 go build -o ../vm-${TRAVIS_TAG}.darwin/vmip && cd ..
     cd imagelist && GOOS=darwin GOARCH=amd64 go build -ldflags "-s" -o ../vm-${TRAVIS_TAG}.darwin/imagelist && cd ..
+    cd vmports && GOOS=darwin GOARCH=amd64 go build -ldflags "-s" -o ../vm-${TRAVIS_TAG}.darwin/vmports && cd ..
     tar czf vm-${TRAVIS_TAG}.darwin.tar.gz vm-${TRAVIS_TAG}.darwin/*
     rm -rf vm-${TRAVIS_TAG}.darwin
 

@@ -1,3 +1,3 @@
-module github.com/mhewedy/vmip
+module github.com/mhewedy/vm/vmip
 
 go 1.13
