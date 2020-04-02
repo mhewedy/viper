@@ -19,14 +19,15 @@ Create, control and connect to VirtualBox VM instances.
 Available commands:
   ls        List all created VMs
   ps        List all running VMs
-  create    Create a VM from OVA file
+  create    Create a VM from VM image file - see "images" subcommand
   rm        Remove one or more VMs
   start     Start one or more VMs
   stop      Stop one or more VMs
   ssh       ssh into a running VM
   forward   Forward port from VM to host
   cp        Copy files from host to VM
-
+  images    List VM images (from OVA files)
+  ip        Show IP address for a running VM
 ```
 
 ### Create a new VM
@@ -55,7 +56,7 @@ $ vm create <distro name>/<distro version> /path/to/provison.sh
 $ vm create ubuntu/bionic ~/init.sh
 ```
 
-> Note: To get list of all local available images use `imagelist`
+> Note: To get list of all local available images use `vm images`
 
 ### List all created VMs
 This subcommand list all created VMs (stopped and running)
