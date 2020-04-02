@@ -98,7 +98,7 @@ create)
 <image> = <distro name>/<distro version>
 \nExamples:
 $ vm create ubuntu/bionic
-\nUse the command \"imagelist\" to list all vm images avaiable
+\nUse the sub command \"images\" to list all vm images avaiable
 "
     exit 2
   fi
@@ -220,7 +220,7 @@ Create, control and connect to VirtualBox VM instances.
 \nAvailable commands:
   ls        List all created VMs
   ps        List all running VMs
-  create    Create a VM from VM image file - see \"images\" subcommand
+  create    Create a VM from VM image file
   rm        Remove one or more VMs
   start     Start one or more VMs
   stop      Stop one or more VMs
