@@ -24,7 +24,7 @@ Available commands:
   start     Start one or more VMs
   stop      Stop one or more VMs
   ssh       ssh into a running VM
-  forward   Forward port from VM to host
+  port      Port forward from VM to host
   cp        Copy files from host to VM
   images    List VM images (from OVA files)
   ip        Show IP address for a running VM
