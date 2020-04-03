@@ -19,7 +19,7 @@ Create, control and connect to VirtualBox VM instances.
 Available commands:
   ls        List all created VMs
   ps        List all running VMs
-  create    Create a VM from VM image file - see "images" subcommand
+  create    Create a VM from VM image file
   tag       Put a tag on the VM
   rm        Remove one or more VMs
   start     Start one or more VMs
