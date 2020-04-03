@@ -254,20 +254,20 @@ Available commands:
     Listing:
       ls        List created VMs
       ps        List running VMs
-      images    List VM images
+      images    List images
       ip        Show IP address for a running VM
 
     VM basic:
-      create    Create a VM from VM image
-      tag       Put a tag on a VM
+      create    Create a VM from image
+      tag       Create tag for a VM
       start     Start one or more VMs
       stop      Stop one or more VMs
       ssh       ssh into a running VM
       rm        Remove one or more VMs
 
   Host operations:
-      port      Port forward from VM to host
-      cp        Copy files from host to VM
+      port      Forward port(s) from a VM to host
+      cp        Copy files from host to a VM
 "
   exit 2
   ;;
