@@ -20,6 +20,7 @@ Available commands:
   ls        List all created VMs
   ps        List all running VMs
   create    Create a VM from VM image file - see "images" subcommand
+  tag       Put a tag on the VM
   rm        Remove one or more VMs
   start     Start one or more VMs
   stop      Stop one or more VMs
@@ -62,14 +63,16 @@ $ vm create ubuntu/bionic ~/init.sh
 This subcommand list all created VMs (stopped and running)
 ```
 $ vm ls
-vm_01
-vm_02
+VM NAME		IMAGE			CPU		MEM		TAGS
+vm_01		ubuntu/bionic		1		1024 MB		spark kafka
+vm_02		ubuntu/bionic		1		1024 MB
 ```
 
 ### List all running VMs
 ```
 $ vm ps
-vm_01
+VM NAME		IMAGE			CPU		MEM		TAGS
+vm_01		ubuntu/bionic		1		1024 MB		spark kafka
 ```
 
 ### Start one or more VMs
