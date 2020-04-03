@@ -39,7 +39,7 @@ create_fn() {
   imagename=$2
 
   mkdir -p "$vmbasedir"
-  vboxmanage import "$HOME/.vms/boxes/${imagename}.ova" --vsys 0 --vmname "$vmname" --basefolder "$vmbasedir" --cpus 1 --memory 1024 >"$vmbasedir/log.out"
+  vboxmanage import "$HOME/.vms/boxes/${imagename}.ova" --vsys 0 --vmname "$vmname" --basefolder "$vmbasedir" --cpus 1 --memory 1024 >>"$vmbasedir/log.out"
   echo "vm created: $vmname"
   echo "$imagename" >>"$vmbasedir/$vmname/image"
 
@@ -65,6 +65,8 @@ rm_fn() {
     echo "deleting $vmname ..."
     vboxmanage controlvm "$vmname" poweroff
     VBoxManage unregistervm "$vmname" --delete
+    vmbasedir="$HOME/.vms"
+    rm -rf "$vmbasedir/$vmname"
   done
 }
 
@@ -86,11 +88,12 @@ stop_fn() {
 
 print_vms() {
   arr=$1
-  printf "VM NAME\t\tIMAGE\t\t\tCPU\t\tMEM\n"
-  if [ ${#arr[@]} -gt 1 ]; then
+  printf "VM NAME\t\tIMAGE\t\t\tCPU\t\tMEM\t\tTAGS\n"
+  if [ ${arr} ]; then
     for element in "${arr[@]}"; do
       spec=($(VBoxManage showvminfo ${element} --machinereadable | grep -E "memory=|cpus=" | cut -d "=" -f2))
-      printf "%s\t\t$(cat ~/.vms/${element}/image)\t\t%s\t\t%s MB\n" ${element} ${spec[1]} ${spec[0]}
+      printf "%s\t\t$(cat ~/.vms/${element}/image)\t\t%s\t\t%s MB\t\t%s\n" ${element} ${spec[1]} ${spec[0]} \
+        "$(echo $(cat ~/.vms/${element}/tags 2>/dev/null))"
     done
   fi
 }
@@ -228,6 +231,20 @@ $ vm ip vm_01 --purge
   vm_name="$2"
   vmip $vm_name "$3"
   ;;
+tag) # very basic impl that does not prevent duplicates and without the ability to untag (go modify the file directly when needed)
+  if [ $# -lt 3 ]; then
+    printf "Usage: vm tag <vmname> <tag>
+\nExamples:
+$ vm tag vm_01 my_k8s
+"
+    exit 2
+  fi
+
+  vmname="$2"
+  tag="$3"
+  vmbasedir="$HOME/.vms"
+  echo "$tag" >>"$vmbasedir/$vmname/tags"
+  ;;
 *)
   printf "Usage: vm <command> [options]
 Create, control and connect to VirtualBox VM instances.
@@ -235,6 +252,7 @@ Create, control and connect to VirtualBox VM instances.
   ls        List all created VMs
   ps        List all running VMs
   create    Create a VM from VM image file
+  tag       Put a tag on the VM
   rm        Remove one or more VMs
   start     Start one or more VMs
   stop      Stop one or more VMs

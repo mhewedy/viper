@@ -8,14 +8,14 @@ stoppedVms() {
 
 _vm() {
   local state
-  _arguments '1: :(ls ps create rm start stop ssh port cp images ip)' '*: :->vms'
+  _arguments '1: :(ls ps create tag rm start stop ssh port cp images ip)' '*: :->vms'
 
   case $state in
   vms)
     case $words[2] in
     create) _files ;;
     start) _describe 'command' "($(stoppedVms))" ;;
-    rm) _describe 'command' "($(vboxmanage list vms | cut -d " " -f1 | cut -d "\"" -f2))" ;;
+    rm | tag) _describe 'command' "($(vboxmanage list vms | cut -d " " -f1 | cut -d "\"" -f2))" ;;
     ssh | stop | port | cp | ip) _describe 'command' "($(vboxmanage list runningvms | cut -d " " -f1 | cut -d "\"" -f2))" ;;
     esac
     ;;
