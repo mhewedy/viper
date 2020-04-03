@@ -41,6 +41,7 @@ create_fn() {
   mkdir -p "$vmbasedir"
   vboxmanage import "$HOME/.vms/boxes/${imagename}.ova" --vsys 0 --vmname "$vmname" --basefolder "$vmbasedir" --cpus 1 --memory 1024 >"$vmbasedir/log.out"
   echo "vm created: $vmname"
+  echo "$imagename" >>"$vmbasedir/$vmname/image"
 
   if [ "$#" -gt 2 ]; then
     script=$3
@@ -86,10 +87,21 @@ stop_fn() {
 # ---- start of case statement
 case $1 in
 ls) # vm ls
-  vboxmanage list vms | cut -d " " -f1 | cut -d "\"" -f2
+  arr=($(vboxmanage list vms | cut -d " " -f1 | cut -d "\"" -f2))
+
+  printf "VM NAME\t\tIMAGE\n"
+  for element in "${arr[@]}"; do
+    printf "%s\t\t$(cat ~/.vms/${element}/image)\n" ${element}
+  done
+
   ;;
 ps) # vm ps
-  vboxmanage list runningvms | cut -d " " -f1 | cut -d "\"" -f2
+  arr=($(vboxmanage list runningvms | cut -d " " -f1 | cut -d "\"" -f2))
+
+  printf "VM NAME\t\tIMAGE\n"
+  for element in "${arr[@]}"; do
+    printf "%s\t\t$(cat ~/.vms/${element}/image)\n" ${element}
+  done
   ;;
 create)
   if [ $# -lt 2 ]; then
