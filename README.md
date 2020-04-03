@@ -17,18 +17,24 @@ Usage: vm <command> [options]
 Create, control and connect to VirtualBox VM instances.
 
 Available commands:
-  ls        List all created VMs
-  ps        List all running VMs
-  create    Create a VM from VM image file
-  tag       Put a tag on the VM
-  rm        Remove one or more VMs
-  start     Start one or more VMs
-  stop      Stop one or more VMs
-  ssh       ssh into a running VM
-  port      Port forward from VM to host
-  cp        Copy files from host to VM
-  images    List VM images (from OVA files)
-  ip        Show IP address for a running VM
+
+    Listing:
+      ls        List created VMs
+      ps        List running VMs
+      images    List VM images
+      ip        Show IP address for a running VM
+
+    VM basic:
+      create    Create a VM from VM image
+      tag       Put a tag on a VM
+      start     Start one or more VMs
+      stop      Stop one or more VMs
+      ssh       ssh into a running VM
+      rm        Remove one or more VMs
+
+  Host operations:
+      port      Port forward from VM to host
+      cp        Copy files from host to VM
 ```
 
 ### Create a new VM
