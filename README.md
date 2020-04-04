@@ -40,14 +40,11 @@ Available commands:
 ### Create a new VM
 
 The following steps need to do **once**:
-1. [Install Linux on VirtualBox](https://www.wikihow.com/Install-Ubuntu-on-VirtualBox) (make sure to have a user named `vm_user` with any password of choice)
+1. [Install Linux on VirtualBox](https://www.wikihow.com/Install-Ubuntu-on-VirtualBox)
 2. [Change network settings to *Bridge*](https://www.opentechguides.com/how-to/article/virtualbox/140/vm-virtualbox-networking.html)
-3. Install ssh server on the guest os (e.g. `openssh-server`) 
-4. *Optional* - You may need to login to the VM and do some actions such as:
-   1. Execute the command`visudo` and add `vm_user ALL=(ALL) NOPASSWD:ALL` to allow execute sudo commands without providing password (required for provisioner to work)
-   2. Copy the content of [vm_rsa.pub](https://raw.githubusercontent.com/mhewedy/vm/master/keys/vm_rsa.pub) to the VM as the file `$HOME/.ssh/authorized_keys`
-5. [Export the VM as *OVA*](https://www.maketecheasier.com/import-export-ova-files-in-virtualbox/)
-6. Move the exported image under `$HOME/.vms/boxes/<distro name>/<distro version>.ova`, 
+3. Login to the guest os then run the script [post_create_deb.sh](https://raw.githubusercontent.com/mhewedy/vm/master/samples/post_create_deb.sh) to do required setup. (you will have to slightly modify it to run on non-debian distro)
+4. [Export the VM as *OVA*](https://www.maketecheasier.com/import-export-ova-files-in-virtualbox/)
+5. Move the exported image under `$HOME/.vms/boxes/<distro name>/<distro version>.ova`, 
 for example in case of ubuntu 18.04, move the exported ova file to `$HOME/.vms/boxes/ubuntu/bionic.ova`
 
 *Then each time you need to create a new VM execute the following command:*
