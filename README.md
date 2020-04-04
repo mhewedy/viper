@@ -53,7 +53,8 @@ $ vm create ubuntu/bionic ~/init.sh
 ```
 
 > Note: To get list of all local available images use `vm images`
-> Note: You will need to create an Image first, see [How to create an image](How to create an image)
+
+> Note: You will need to create an Image first, see [How to create an image](#how-to-create-an-image)
 
 ### List all created VMs
 This subcommand list all created VMs (stopped and running)
