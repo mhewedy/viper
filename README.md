@@ -42,7 +42,7 @@ Available commands:
 The following steps need to do **once**:
 1. [Install Linux on VirtualBox](https://www.wikihow.com/Install-Ubuntu-on-VirtualBox)
 2. [Change network settings to *Bridge*](https://www.opentechguides.com/how-to/article/virtualbox/140/vm-virtualbox-networking.html)
-3. Login to the guest os then run the script [post_create_deb.sh](https://raw.githubusercontent.com/mhewedy/vm/master/samples/post_create_deb.sh) to do required setup. (you will have to slightly modify it to run on non-debian distro)
+3. Login to the guest os then run the script [post_create_deb.sh](https://raw.githubusercontent.com/mhewedy/vm/master/samples/post_create_deb.sh) to do required setup. *(you will have to slightly modify it to run on non-debian distro)*
 4. [Export the VM as *OVA*](https://www.maketecheasier.com/import-export-ova-files-in-virtualbox/)
 5. Move the exported image under `$HOME/.vms/boxes/<distro name>/<distro version>.ova`, 
 for example in case of ubuntu 18.04, move the exported ova file to `$HOME/.vms/boxes/ubuntu/bionic.ova`
