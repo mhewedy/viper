@@ -103,4 +103,4 @@ The following steps need to do **once** for each image you want to create:
 
 ## Why not Vagrant:
 
-* **Vagrant** uses a `Vagrantfile` which I think is most suitated to be source-controlled, and for my case it is an overhead to maintain such file for each vm I want to create. (like create k8s cluster, etc...), I want kind of global accessibility.
+* **Vagrant** uses a `Vagrantfile` which I think is most suited to be source-controlled, and for my case it is an overhead to maintain such file for each vm I want to create. (like create k8s cluster, etc...), I want kind of global accessibility.
