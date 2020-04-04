@@ -92,7 +92,7 @@ print_vms() {
   if [ ${arr} ]; then
     for element in "${arr[@]}"; do
       spec=($(VBoxManage showvminfo ${element} --machinereadable | grep -E "memory=|cpus=" | cut -d "=" -f2))
-      printf "%s\t\t$(cat ~/.vms/${element}/image)\t\t%s\t\t%s MB\t\t%s\n" ${element} ${spec[1]} ${spec[0]} \
+      printf "%s\t\t$(cat ~/.vms/${element}/image 2>/dev/null || cat <(echo "\t") )\t\t%s\t\t%s MB\t\t%s\n" ${element} ${spec[1]} ${spec[0]} \
         "$(echo $(cat ~/.vms/${element}/tags 2>/dev/null))"
     done
   fi
