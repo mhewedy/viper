@@ -27,7 +27,7 @@ func main() {
 
 		portMapping := getPortMapping(vmPort, localPort)
 		for vm, local := range portMapping {
-			result += "-L " + local + ":localhost:" + vm + " "
+			result += "-L 0.0.0.0:" + local + ":localhost:" + vm + " "
 		}
 	}
 	if len(result) != 0 {
