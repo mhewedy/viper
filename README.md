@@ -41,23 +41,23 @@ Available commands:
 Use the following command to create a VM
 
 ```
-$ vm create <distro name>/<distro version>
+$ vm create <image name>
 # example
 $ vm create ubuntu/bionic
 ```
 Or in case you want to create and provision the VM: (see samples folder for sample provision scripts)
 ```
-$ vm create <distro name>/<distro version> /path/to/provison.sh 
+$ vm create <image name> /path/to/provison.sh 
 # example
 $ vm create ubuntu/bionic ~/init.sh
 ```
 
 > Note: To get list of all local available images use `vm images`
 
-> Note: You will need to create an Image first, see [How to create an image](#how-to-create-an-image)
+> Note: You will need to create one or more images first, see [How to create an image](#how-to-create-an-image).
 
 ### List all created VMs
-This subcommand list all created VMs (stopped and running)
+This subcommand list all VMs (stopped and running)
 ```
 $ vm ls
 VM NAME		IMAGE			CPU		MEM		TAGS
@@ -72,14 +72,15 @@ VM NAME		IMAGE			CPU		MEM		TAGS
 vm_01		ubuntu/bionic		1		1024 MB		spark kafka
 ```
 
-### Start one or more VMs
-```
-$ vm start vm_01 vm_02
-```
 
 ### ssh into a VM
 ```
 $ vm ssh vm_03
+```
+
+### Start one or more VM
+```
+$ vm start vm_01 vm_02
 ```
 
 ### Stop one or more VMs
@@ -95,7 +96,8 @@ $ vm rm vm_03
 
 ## How to create an image:
 
-The following steps need to do **once** for each image you want to create:
+**The following steps need to do done once for each image you want to create:**
+
 1. [Install Linux on VirtualBox](https://www.wikihow.com/Install-Ubuntu-on-VirtualBox)
 2. [Change network settings to *Bridge*](https://www.opentechguides.com/how-to/article/virtualbox/140/vm-virtualbox-networking.html)
 3. Login to the guest os then run the script [post_create_deb.sh](https://raw.githubusercontent.com/mhewedy/vm/master/samples/post_create_deb.sh) to do required setup. *(you will have to slightly modify it to run on non-debian distro)*
