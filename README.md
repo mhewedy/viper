@@ -45,7 +45,7 @@ $ vm create <image name>
 # example
 $ vm create ubuntu/bionic
 ```
-Or in case you want to create and provision the VM: (see samples folder for sample provision scripts)
+Or in case you want to create and provision the VM: (see [samples folder](https://github.com/mhewedy/vm/tree/master/samples/provision) for sample provision scripts)
 ```
 $ vm create <image name> /path/to/provison.sh 
 # example
