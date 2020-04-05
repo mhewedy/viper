@@ -86,27 +86,15 @@ stop_fn() {
   done
 }
 
-print_vms() {
-  arr=$1
-  printf "VM NAME\t\tIMAGE\t\t\tCPU\t\tMEM\t\tTAGS\n"
-  if [ ${arr} ]; then
-    for element in "${arr[@]}"; do
-      spec=($(VBoxManage showvminfo ${element} --machinereadable | grep -E "memory=|cpus=" | cut -d "=" -f2))
-      printf "%s\t\t$(cat ~/.vms/${element}/image 2>/dev/null || cat <(echo "\t") )\t\t%s\t\t%s MB\t\t%s\n" ${element} ${spec[1]} ${spec[0]} \
-        "$(echo $(cat ~/.vms/${element}/tags 2>/dev/null))"
-    done
-  fi
-}
-
 # ---- start of case statement
 case $1 in
 ls) # vm ls
   arr=($(vboxmanage list vms | cut -d " " -f1 | cut -d "\"" -f2))
-  print_vms $arr
+  vminfo "${arr[@]}"
   ;;
 ps) # vm ps
   arr=($(vboxmanage list runningvms | cut -d " " -f1 | cut -d "\"" -f2))
-  print_vms $arr
+  vminfo "${arr[@]}"
   ;;
 create)
   if [ $# -lt 2 ]; then

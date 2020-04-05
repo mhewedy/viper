@@ -1,0 +1,2 @@
+# vminfo
+get vminfo

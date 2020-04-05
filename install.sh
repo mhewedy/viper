@@ -8,6 +8,8 @@ cp vm $HOME/bin
 cp vmip $HOME/bin
 cp vmports $HOME/bin
 cp imagelist $HOME/bin
+cp vminfo $HOME/bin
+
 cp complete/zsh.sh $HOME/.vms/complete-zsh.sh
 
 # copy ssh key
