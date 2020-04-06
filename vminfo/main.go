@@ -1,12 +1,11 @@
 package main
 
 import (
-	"bytes"
-	"errors"
+	"encoding/xml"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"os"
-	"os/exec"
 	"sort"
 	"strconv"
 	"strings"
@@ -68,11 +67,9 @@ func printInfo(out []*vmInfo) {
 
 func getVMInfo(vm string) *vmInfo {
 
-	o, _ := execute("vboxmanage", "showvminfo", vm, "--machinereadable")
-	output := *linesToMap(o, "=")
-
-	cpu, _ := strconv.Atoi(output["cpus"])
-	mem, _ := strconv.Atoi(output["memory"])
+	c, m := getVMCpuAndMem(vm)
+	cpu, _ := strconv.Atoi(c)
+	mem, _ := strconv.Atoi(m)
 
 	image := readFromVMDB(vm, "image", "\t")
 	tags := readFromVMDB(vm, "tags", "\t")
@@ -87,7 +84,7 @@ func getVMInfo(vm string) *vmInfo {
 }
 
 func readFromVMDB(vm string, dbFile string, defaultValue string) string {
-	b, _ := ioutil.ReadFile(os.Getenv("HOME") + "/.vms/" + vm + "/" + dbFile)
+	b, _ := ioutil.ReadFile(getDBPath(vm) + "/" + dbFile)
 	v := strings.ReplaceAll(string(b), "\n", " ")
 	if len(v) == 0 {
 		return defaultValue
@@ -95,33 +92,38 @@ func readFromVMDB(vm string, dbFile string, defaultValue string) string {
 	return v
 }
 
-func linesToMap(lines string, sep string) *map[string]string {
-	mapped := make(map[string]string)
+func getVMCpuAndMem(vm string) (string, string) {
 
-	fields := strings.Split(lines, "\n")
-	for i := range fields {
-		s := strings.Split(fields[i], sep)
-		if len(s) > 1 {
-			mapped[s[0]] = s[1]
-		}
+	type vbox struct {
+		XMLName xml.Name `xml:"VirtualBox"`
+		Machine struct {
+			Hardware struct {
+				CPU struct {
+					Count string `xml:"count,attr"`
+				} `xml:"CPU"`
+				Memory struct {
+					RAMSize string `xml:"RAMSize,attr"`
+				} `xml:"Memory"`
+			} `xml:"Hardware"`
+		} `xml:"Machine"`
 	}
-	return &mapped
-}
 
-func execute(command string, args ...string) (string, error) {
-	cmd := exec.Command(command, args...)
-
-	var stdout bytes.Buffer
-	var stderr bytes.Buffer
-
-	cmd.Stdout = &stdout
-	cmd.Stderr = &stderr
-
-	err := cmd.Run()
+	var vb vbox
+	b, _ := ioutil.ReadFile(getDBPath(vm) + "/" + vm + ".vbox")
+	err := xml.Unmarshal(b, &vb)
 
 	if err != nil {
-		return "", errors.New(string(stderr.Bytes()))
+		log.Fatal(err)
 	}
 
-	return string(stdout.Bytes()), nil
+	cpuCount := vb.Machine.Hardware.CPU.Count
+	if len(cpuCount) == 0 {
+		cpuCount = "1"
+	}
+	return cpuCount,
+		vb.Machine.Hardware.Memory.RAMSize
+}
+
+func getDBPath(vm string) string {
+	return os.Getenv("HOME") + "/.vms/" + vm + "/"
 }
