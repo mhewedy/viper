@@ -184,24 +184,50 @@ $ vm port vm_01 4040:40040 8080-8088:9080-9088
   ssh -i ~/.ssh/vm_rsa $(vmports $ports) "$vmuser@$ip" -N
   ;;
 cp)
-  if [ $# -lt 3 ]; then
-    printf "Usage: vm cp <vmname> <local file>
-\nCopy local files to home directory the vm
+
+  usage="Usage: vm cp <vmname> [--local-file=<file>|--remote-file=<file>]
+\nCopy files between host and VM
 \nExamples:
+
+# copy from local host to VM:
 # copy file.txt from host to user's home directory inside the vm
-$ vm cp vm_01 file.txt
+$ vm cp vm_01 --local-file=file.txt
+
+# copy from VM to local host:
+# copy file.txt from user's home directory inside the vm to the current direcoty on the host
+$ vm cp vm_01 --remote-file=~/file.txt
 "
+
+  if [ $# -lt 3 ]; then
+    printf "$usage"
     exit 2
   fi
 
   vm_name="$2"
-  local_file="$3"
-  ip=$(getvmip "$vm_name")
+  fileparam="$3"
 
-  establish_ssh "$vm_name"
+  if [[ "$fileparam" =~ ^--local-file=* ]]; then
 
-  scp -i ~/.ssh/vm_rsa $local_file $vmuser@$ip:/home/$vmuser/$local_file
+    ip=$(getvmip "$vm_name")
+    establish_ssh "$vm_name"
+
+    file=$(echo $fileparam | cut -d '=' -f 2)
+    scp -i ~/.ssh/vm_rsa $file $vmuser@$ip:/home/$vmuser/$file
+
+  elif [[ "$fileparam" =~ ^--remote-file=* ]]; then
+
+    ip=$(getvmip "$vm_name")
+    establish_ssh "$vm_name"
+
+    file=$(echo $fileparam | cut -d '=' -f 2)
+    scp -i ~/.ssh/vm_rsa $vmuser@$ip:$file .
+
+  else
+    printf "$usage"
+  fi
+
   ;;
+
 images)
   imagelist
   ;;
@@ -255,7 +281,7 @@ Available commands:
 
   Host operations:
       port      Forward port(s) from a VM to host
-      cp        Copy files from host to a VM
+      cp        Copy files between host and VM
 "
   exit 2
   ;;

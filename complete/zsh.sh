@@ -22,4 +22,4 @@ _vm() {
   esac
 }
 
-compdef _vm vm
+compdef _vm viper
