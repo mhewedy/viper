@@ -68,7 +68,7 @@ func ping() {
 
 	for i := range [max]int{} {
 		go func(i int) {
-			ip := "192.168.1." + strconv.Itoa(i)
+			ip := getIPPrefix() + strconv.Itoa(i)
 			cmd := exec.Command("nmap", "-sP", "--max-retries=1", "--host-timeout=100ms", ip)
 			_ = cmd.Run()
 			wg.Done()
