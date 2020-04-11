@@ -232,7 +232,7 @@ images)
   if [[ -z $img ]]; then
     printf "No images found.\nsee https://github.com/mhewedy/viper/blob/master/README.md#how-to-create-an-image for how to create an image\n"
   else
-    echo $img
+    echo $img | tr " " "\n"
   fi
   ;;
 ip)
