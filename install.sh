@@ -14,8 +14,8 @@ cp complete/zsh.sh $HOME/.viper/complete-zsh.sh
 
 # copy ssh key
 mkdir -p $HOME/.ssh
-cp -rf keys/viper_rsa $HOME/.ssh
-chmod 600 $HOME/.ssh/viper_rsa
+cp -rf keys/viper_rsa $HOME/.viper
+chmod 600 $HOME/.viper/viper_rsa
 
 # prepare boxes
 mkdir -p $HOME/.viper/boxes/

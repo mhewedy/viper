@@ -24,11 +24,11 @@ establish_ssh() {
   vmname=$1
   # try first the nice way that waits until ip is assigned
   ip=$(getvmip "$vmname")
-  ssh -i ~/.ssh/vm_rsa "$vmuser@$ip" -- ls &>/dev/null
+  ssh -i "$vmbasedir/viper_rsa" "$vmuser@$ip" -- ls &>/dev/null
   while [ $? -ne 0 ]; do
     # try the hard way if the assigned ip is invalid
     ip=$(vmip "$vmname" --purge)
-    ssh -i ~/.ssh/vm_rsa "$vmuser@$ip" -- ls &>/dev/null
+    ssh -i "$vmbasedir/viper_rsa" "$vmuser@$ip" -- ls &>/dev/null
   done
 }
 
@@ -53,9 +53,9 @@ create_fn() {
 
     establish_ssh "$vmname"
     ip=$(getvmip "$vmname")
-    scp -i ~/.ssh/vm_rsa "$script" "$vmuser@$ip:/tmp/$rscript" >"$vmbasedir/log.out"
-    ssh -i ~/.ssh/vm_rsa "$vmuser@$ip" -- chmod +x "/tmp/$rscript"
-    ssh -i ~/.ssh/vm_rsa "$vmuser@$ip" -- "/tmp/$rscript"
+    scp -i "$vmbasedir/viper_rsa" "$script" "$vmuser@$ip:/tmp/$rscript" >"$vmbasedir/log.out"
+    ssh -i "$vmbasedir/viper_rsa" "$vmuser@$ip" -- chmod +x "/tmp/$rscript"
+    ssh -i "$vmbasedir/viper_rsa" "$vmuser@$ip" -- "/tmp/$rscript"
   fi
 }
 
@@ -154,7 +154,7 @@ $ viper ssh vm_01
   establish_ssh "$2"
 
   ip=$(getvmip "$2")
-  ssh -i ~/.ssh/vm_rsa "$vmuser@$ip" "${@:3}"
+  ssh -i "$vmbasedir/viper_rsa" "$vmuser@$ip" "${@:3}"
   ;;
 port)
   if [ $# -lt 3 ]; then
@@ -180,7 +180,7 @@ $ viper port vm_01 4040:40040 8080-8088:9080-9088
   establish_ssh "$vm_name"
 
   printf "\nConnected. Press CTRL+C anytime to stop\n"
-  ssh -i ~/.ssh/vm_rsa $(vmports $ports) "$vmuser@$ip" -N
+  ssh -i "$vmbasedir/viper_rsa" $(vmports $ports) "$vmuser@$ip" -N
   ;;
 cp)
 
@@ -211,7 +211,7 @@ $ viper cp vm_01 --remote-file=~/file.txt
     establish_ssh "$vm_name"
 
     file=$(echo $fileparam | cut -d '=' -f 2)
-    scp -i ~/.ssh/vm_rsa $file $vmuser@$ip:/home/$vmuser/$file
+    scp -i "$vmbasedir/viper_rsa" $file $vmuser@$ip:/home/$vmuser/$file
 
   elif [[ "$fileparam" =~ ^--remote-file=* ]]; then
 
@@ -219,7 +219,7 @@ $ viper cp vm_01 --remote-file=~/file.txt
     establish_ssh "$vm_name"
 
     file=$(echo $fileparam | cut -d '=' -f 2)
-    scp -i ~/.ssh/vm_rsa $vmuser@$ip:$file .
+    scp -i "$vmbasedir/viper_rsa" $vmuser@$ip:$file .
 
   else
     printf "$usage"
