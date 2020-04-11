@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	baseDir := os.Getenv("HOME") + "/.vms/boxes/"
+	baseDir := os.Getenv("HOME") + "/.viper/boxes/"
 
 	err := filepath.Walk(baseDir, func(path string, info os.FileInfo, err error) error {
 		if err != nil {

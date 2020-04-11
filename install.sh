@@ -2,37 +2,37 @@
 
 # copy binaries
 mkdir -p $HOME/bin
-mkdir -p $HOME/.vms
+mkdir -p $HOME/.viper
 
-cp vm $HOME/bin
+cp viper $HOME/bin
 cp vmip $HOME/bin
 cp vmports $HOME/bin
 cp imagelist $HOME/bin
 cp vminfo $HOME/bin
 
-cp complete/zsh.sh $HOME/.vms/complete-zsh.sh
+cp complete/zsh.sh $HOME/.viper/complete-zsh.sh
 
 # copy ssh key
 mkdir -p $HOME/.ssh
-cp -rf keys/vm_rsa $HOME/.ssh
-chmod 600 $HOME/.ssh/vm_rsa
+cp -rf keys/viper_rsa $HOME/.ssh
+chmod 600 $HOME/.ssh/viper_rsa
 
 # prepare boxes
-mkdir -p $HOME/.vms/boxes/
+mkdir -p $HOME/.viper/boxes/
 
 # modify shell rc files
-if [ -f $HOME/.zshrc ] && [ ! -f $HOME/.vms/srcd ]; then
-  printf "\n# vm autocompletion script
-if [ -f '%s/.vms/complete-zsh.sh' ];then
-  . '%s/.vms/complete-zsh.sh';
+if [ -f $HOME/.zshrc ] && [ ! -f $HOME/.viper/srcd ]; then
+  printf "\n# viper autocompletion script
+if [ -f '%s/.viper/complete-zsh.sh' ];then
+  . '%s/.viper/complete-zsh.sh';
 fi\n" "$HOME" "$HOME" >>$HOME/.zshrc
 
-  printf "\n# add vm scripts to path \nexport PATH=\$PATH:\$HOME/bin\n\n" >>$HOME/.zshrc
+  printf "\n# add viper scripts to path \nexport PATH=\$PATH:\$HOME/bin\n\n" >>$HOME/.zshrc
 fi
 
-if [ -f $HOME/.bashrc ] && [ ! -f $HOME/.vms/srcd ]; then
-  printf "\n# add vm scripts to path \nexport PATH=\$PATH:\$HOME/bin\n\n" >>$HOME/.bashrc
+if [ -f $HOME/.bashrc ] && [ ! -f $HOME/.viper/srcd ]; then
+  printf "\n# add viper scripts to path \nexport PATH=\$PATH:\$HOME/bin\n\n" >>$HOME/.bashrc
 fi
 
-mkdir -p $HOME/.vms/
-touch $HOME/.vms/srcd
+mkdir -p $HOME/.viper/
+touch $HOME/.viper/srcd

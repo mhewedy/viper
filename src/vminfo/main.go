@@ -4,7 +4,6 @@ import (
 	"encoding/xml"
 	"fmt"
 	"io/ioutil"
-	"log"
 	"os"
 	"sort"
 	"strconv"
@@ -44,7 +43,9 @@ func main() {
 	for {
 		select {
 		case vmInfo := <-ch:
-			out = append(out, vmInfo)
+			if vmInfo != nil {
+				out = append(out, vmInfo)
+			}
 			i++
 		}
 		if i == len(args) {
@@ -66,6 +67,10 @@ func printInfo(out []*vmInfo) {
 }
 
 func getVMInfo(vm string) *vmInfo {
+
+	if _, err := os.Stat(getDBPath(vm)); os.IsNotExist(err) {
+		return nil
+	}
 
 	c, m := getVMCpuAndMem(vm)
 	cpu, _ := strconv.Atoi(c)
@@ -113,7 +118,7 @@ func getVMCpuAndMem(vm string) (string, string) {
 	err := xml.Unmarshal(b, &vb)
 
 	if err != nil {
-		log.Fatal(err)
+		return "", ""
 	}
 
 	cpuCount := vb.Machine.Hardware.CPU.Count
@@ -125,5 +130,5 @@ func getVMCpuAndMem(vm string) (string, string) {
 }
 
 func getDBPath(vm string) string {
-	return os.Getenv("HOME") + "/.vms/" + vm + "/"
+	return os.Getenv("HOME") + "/.viper/" + vm + "/"
 }

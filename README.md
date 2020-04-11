@@ -1,4 +1,4 @@
-# vm
+# viper
 ### The smart Virtual Machines manager
 Group of scripts/programs to help manage VirtualBox vms - for Mac and Linux
 
@@ -8,12 +8,12 @@ Group of scripts/programs to help manage VirtualBox vms - for Mac and Linux
 * [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
 
 ## Installation
-[Download latest release](https://github.com/mhewedy/vm/releases/latest), extract the archive then run `./install.sh`
+[Download latest release](https://github.com/mhewedy/viper/releases/latest), extract the archive then run `./install.sh`
 
 ## Usage:
 
 ```bash
-Usage: vm <command> [options]
+Usage: viper <command> [options]
 Create, control and connect to VirtualBox VM instances.
 
 Available commands:
@@ -41,25 +41,25 @@ Available commands:
 Use the following command to create a VM
 
 ```
-$ vm create <image name>
+$ viper create <image name>
 # example
-$ vm create ubuntu/bionic
+$ viper create ubuntu/bionic
 ```
-Or in case you want to create and provision the VM: (see [samples folder](https://github.com/mhewedy/vm/tree/master/samples/provision) for sample provision scripts)
+Or in case you want to create and provision the VM: (see [samples folder](https://github.com/mhewedy/viper/tree/master/samples/provision) for sample provision scripts)
 ```
-$ vm create <image name> /path/to/provison.sh 
+$ viper create <image name> /path/to/provison.sh 
 # example
-$ vm create ubuntu/bionic ~/init.sh
+$ viper create ubuntu/bionic ~/init.sh
 ```
 
-> Note: To get list of all local available images use `vm images`
+> Note: To get list of all local available images use `viper images`
 
 > Note: You will need to create one or more images first, see [How to create an image](#how-to-create-an-image).
 
 ### List all created VMs
 This subcommand list all VMs (stopped and running)
 ```
-$ vm ls
+$ viper ls
 VM NAME		IMAGE			CPU		MEM		TAGS
 vm_01		ubuntu/bionic		1		1024 MB		spark kafka
 vm_02		ubuntu/bionic		1		1024 MB
@@ -67,7 +67,7 @@ vm_02		ubuntu/bionic		1		1024 MB
 
 ### List all running VMs
 ```
-$ vm ps
+$ viper ps
 VM NAME		IMAGE			CPU		MEM		TAGS
 vm_01		ubuntu/bionic		1		1024 MB		spark kafka
 ```
@@ -75,23 +75,23 @@ vm_01		ubuntu/bionic		1		1024 MB		spark kafka
 
 ### ssh into a VM
 ```
-$ vm ssh vm_03
+$ viper ssh vm_03
 ```
 
 ### Start one or more VM
 ```
-$ vm start vm_01 vm_02
+$ viper start vm_01 vm_02
 ```
 
 ### Stop one or more VMs
 ```
-$ vm stop vm_03
+$ viper stop vm_03
 ```
 
 ### Remove one or more VMs
 Will stop and remove listed VMs
 ```
-$ vm rm vm_03
+$ viper rm vm_03
 ```
 
 ## How to create an image:
@@ -100,9 +100,9 @@ $ vm rm vm_03
 
 1. [Install Linux on VirtualBox](https://www.wikihow.com/Install-Ubuntu-on-VirtualBox)
 2. [Change network settings to *Bridge*](https://www.opentechguides.com/how-to/article/virtualbox/140/vm-virtualbox-networking.html)
-3. Login to the VM then run [post_create_deb.sh](https://raw.githubusercontent.com/mhewedy/vm/master/samples/post_create_deb.sh) to do required setup. *(you will have to slightly modify it to run on non-debian distro)*
+3. Login to the VM then run [post_create_deb.sh](https://raw.githubusercontent.com/mhewedy/viper/master/samples/post_create_deb.sh) to do required setup. *(you will have to slightly modify it to run on non-debian distro)*
 4. [Export the VM as *OVA*](https://www.maketecheasier.com/import-export-ova-files-in-virtualbox/)
-5. Move the exported image under `$HOME/.vms/boxes/<distro name>/<distro version>.ova`, for example in case of ubuntu 18.04, move the exported ova file to `$HOME/.vms/boxes/ubuntu/bionic.ova`
+5. Move the exported image under `$HOME/.viper/boxes/<distro name>/<distro version>.ova`, for example in case of ubuntu 18.04, move the exported ova file to `$HOME/.viper/boxes/ubuntu/bionic.ova`
 
 ## Why not Vagrant:
 
