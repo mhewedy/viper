@@ -1,6 +1,7 @@
 # viper
 ### The smart Virtual Machines manager
-Group of scripts/programs to help manage VirtualBox vms - for Mac and Linux
+
+Create, control and connect to VirtualBox VM instances.
 
 ----
 
