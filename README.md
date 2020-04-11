@@ -97,18 +97,18 @@ $ viper rm vm_03
 ### Copy files:
 Copy remote file on VM to you local host in the current path:
 ```
-$ vm cp vm_01 --remote-file=/path/to/file/on/vm
+$ viper cp vm_01 --remote-file=/path/to/file/on/vm
 ```
 
 Copy local file from your host to the VM's home directory:
 ```
-$ vm cp vm_01 --local-file=/path/to/file/on/host
+$ viper cp vm_01 --local-file=/path/to/file/on/host
 ```
 
 ### Port forward:
 forward ports from VM to local host (all ports from 8080 to 8090):
 ```
-$ port vm_01 8080-8090
+$ viper port vm_01 8080-8090
 ```
 
 
