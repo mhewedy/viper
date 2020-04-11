@@ -228,7 +228,12 @@ $ viper cp vm_01 --remote-file=~/file.txt
   ;;
 
 images)
-  imagelist
+  img=$(imagelist)
+  if [[ -z $img ]]; then
+    echo "see https://github.com/mhewedy/viper/blob/master/README.md#how-to-create-an-image for how to create an image."
+  else
+    echo $img
+  fi
   ;;
 ip)
   if [ $# -lt 2 ]; then
