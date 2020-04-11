@@ -1,5 +1,8 @@
 # viper
 ### The smart Virtual Machines manager
+
+Create, control and connect to VirtualBox VM instances.
+
 ----
 
 ## Prerequisites
