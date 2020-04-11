@@ -11,7 +11,7 @@ sudo apt install yq -y
 
 sudo yq w -i /etc/netplan/50-cloud-init.yaml network.ethernets.enp0s3.dhcp4 false
 sudo yq w -i /etc/netplan/50-cloud-init.yaml network.ethernets.enp0s3.addresses[+] "$(hostname -I | awk '{print $1}')/24"
-sudo yq w -i /etc/netplan/50-cloud-init.yaml network.ethernets.enp0s3.gateway4 192.168.1.1
+sudo yq w -i /etc/netplan/50-cloud-init.yaml network.ethernets.enp0s3.gateway4 192.168.100.1
 sudo yq w -i /etc/netplan/50-cloud-init.yaml network.ethernets.enp0s3.nameservers.addresses[+] 8.8.8.8
 sudo yq w -i /etc/netplan/50-cloud-init.yaml network.ethernets.enp0s3.nameservers.addresses[+] 8.8.4.4
 
