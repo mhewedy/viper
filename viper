@@ -230,7 +230,7 @@ $ viper cp vm_01 --remote-file=~/file.txt
 images)
   img=$(imagelist)
   if [[ -z $img ]]; then
-    echo "see https://github.com/mhewedy/viper/blob/master/README.md#how-to-create-an-image for how to create an image"
+    printf "No images found.\nsee https://github.com/mhewedy/viper/blob/master/README.md#how-to-create-an-image for how to create an image\n"
   else
     echo $img
   fi
