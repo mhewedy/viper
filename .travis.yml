@@ -8,7 +8,7 @@ before_deploy:
     mkdir viper-${TRAVIS_TAG}.linux
     cp -rf {samples,keys,install.sh,viper,complete} viper-${TRAVIS_TAG}.linux
     cd src/vmip && GOOS=linux GOARCH=amd64 go build -o ../../viper-${TRAVIS_TAG}.linux/vmip && cd ../..
-    cd src/imagelist && GOOS=linux GOARCH=amd64 go build -ldflags "-s" -o ../../viper-${TRAVIS_TAG}.linux/imagelist && cd ../..
+    cd src/vmimages && GOOS=linux GOARCH=amd64 go build -ldflags "-s" -o ../../viper-${TRAVIS_TAG}.linux/vmimages && cd ../..
     cd src/vmports && GOOS=linux GOARCH=amd64 go build -ldflags "-s" -o ../../viper-${TRAVIS_TAG}.linux/vmports && cd ../..
     cd src/vminfo && GOOS=linux GOARCH=amd64 go build -ldflags "-s" -o ../../viper-${TRAVIS_TAG}.linux/vminfo && cd ../..
     tar czf viper-${TRAVIS_TAG}.linux.tar.gz viper-${TRAVIS_TAG}.linux/*
@@ -17,7 +17,7 @@ before_deploy:
     mkdir viper-${TRAVIS_TAG}.darwin
     cp -rf {samples,keys,install.sh,viper,complete} viper-${TRAVIS_TAG}.darwin
     cd src/vmip && GOOS=darwin GOARCH=amd64 go build -o ../../viper-${TRAVIS_TAG}.darwin/vmip && cd ../..
-    cd src/imagelist && GOOS=darwin GOARCH=amd64 go build -ldflags "-s" -o ../../viper-${TRAVIS_TAG}.darwin/imagelist && cd ../..
+    cd src/vmimages && GOOS=darwin GOARCH=amd64 go build -ldflags "-s" -o ../../viper-${TRAVIS_TAG}.darwin/vmimages && cd ../..
     cd src/vmports && GOOS=darwin GOARCH=amd64 go build -ldflags "-s" -o ../../viper-${TRAVIS_TAG}.darwin/vmports && cd ../..
     cd src/vminfo && GOOS=darwin GOARCH=amd64 go build -ldflags "-s" -o ../../viper-${TRAVIS_TAG}.darwin/vminfo && cd ../..
     tar czf viper-${TRAVIS_TAG}.darwin.tar.gz viper-${TRAVIS_TAG}.darwin/*

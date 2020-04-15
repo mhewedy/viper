@@ -7,7 +7,7 @@ mkdir -p $HOME/.viper
 cp viper $HOME/bin
 cp vmip $HOME/bin
 cp vmports $HOME/bin
-cp imagelist $HOME/bin
+cp vmimages $HOME/bin
 cp vminfo $HOME/bin
 
 cp complete/zsh.sh $HOME/.viper/complete-zsh.sh

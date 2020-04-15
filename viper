@@ -38,6 +38,8 @@ create_fn() {
   vmname="vm_$(printf %02d $next)"
   imagename=$2
 
+  vmimages --create ${imagename}
+
   mkdir -p "$vmbasedir"
   vboxmanage import "$vmbasedir/boxes/${imagename}.ova" --vsys 0 --vmname "$vmname" --basefolder "$vmbasedir" --cpus 1 --memory 1024 >>"$vmbasedir/log.out"
   echo "vm created: $vmname"
@@ -228,12 +230,7 @@ $ viper cp vm_01 --remote-file=~/file.txt
   ;;
 
 images)
-  img=$(imagelist)
-  if [[ -z $img ]]; then
-    printf "No images found.\nsee https://github.com/mhewedy/viper/blob/master/README.md#how-to-create-an-image for how to create an image\n"
-  else
-    echo $img | tr " " "\n"
-  fi
+  vmimages --list
   ;;
 ip)
   if [ $# -lt 2 ]; then
