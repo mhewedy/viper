@@ -49,7 +49,7 @@ func listRemoteImages() ([]vm, error) {
 			return nil, err
 		}
 		tmp = tmpFile.Name()
-		_, err = execute("wget", "-O", tmp, "https://www.dropbox.com/s/nsoeqowzbkdqlvw/images.csv?dl=1")
+		_, err = execute("wget", "-O", tmp, "https://raw.githubusercontent.com/mhewedy/viper/master/samples/images.csv")
 		if err != nil {
 			return nil, err
 		}
