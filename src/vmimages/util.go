@@ -3,12 +3,37 @@ package main
 import (
 	"bytes"
 	"errors"
+	"fmt"
 	"os"
 	"os/exec"
+	"time"
 )
 
 func getViperHomeDir() string {
 	return os.Getenv("HOME") + "/.viper"
+}
+
+func executeAndShowProgress(command string, args ...string) error {
+	cmd := exec.Command(command, args...)
+
+	err := cmd.Start()
+	if err != nil {
+		return err
+	}
+
+	go func() {
+		for {
+			fmt.Print(".")
+			time.Sleep(3 * time.Second)
+		}
+	}()
+
+	err = cmd.Wait()
+	if err != nil {
+		return err
+	}
+	fmt.Println()
+	return nil
 }
 
 func execute(command string, args ...string) (string, error) {

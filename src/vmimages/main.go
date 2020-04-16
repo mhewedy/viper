@@ -67,7 +67,7 @@ func create(image string) error {
 
 func download(vm *vm) error {
 	fmt.Println("Downloading image", vm.Name, "from", vm.URL)
-	fmt.Println("It might take a while depending on your internet connection...")
+	fmt.Print("It might take a while depending on your internet connection")
 
 	sp := strings.Split(vm.Name, "/")
 	vmBasePath := getViperHomeDir() + "/boxes/" + sp[0]
@@ -77,11 +77,10 @@ func download(vm *vm) error {
 		return err
 	}
 
-	_, err = execute("wget", "-O", vmBasePath+"/"+sp[1]+".ova", vm.URL)
+	err = executeAndShowProgress("wget", "-O", vmBasePath+"/"+sp[1]+".ova", vm.URL)
 	if err != nil {
 		return err
 	}
-
 	return nil
 }
 

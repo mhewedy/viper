@@ -43,7 +43,7 @@ create_fn() {
   mkdir -p "$vmbasedir"
   vboxmanage import "$vmbasedir/boxes/${imagename}.ova" --vsys 0 --vmname "$vmname" --basefolder "$vmbasedir" --cpus 1 --memory 1024 >>"$vmbasedir/log.out"
   echo "vm created: $vmname"
-  echo "$imagename" >>"$vmbasedir/$vmname/image"
+  echo "$imagename" >"$vmbasedir/$vmname/image"
 
   if [ "$#" -gt 2 ]; then
     script=$3
