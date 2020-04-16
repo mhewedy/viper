@@ -53,7 +53,7 @@ $ viper create <image name> /path/to/provison.sh
 $ viper create ubuntu/bionic ~/init.sh
 ```
 
-> Note: To get list of all local available images use `viper images`
+> Note: To get list of all available images use `viper images`
 
 ### List all created VMs
 This subcommand list all VMs (stopped and running)
