@@ -71,15 +71,14 @@ VM NAME		IMAGE			CPU		MEM		TAGS
 vm_01		ubuntu/bionic		1		1024 MB		spark kafka
 ```
 
+### Start one or more VM
+```
+$ viper start vm_01 vm_02
+```
 
 ### ssh into a VM
 ```
 $ viper ssh vm_03
-```
-
-### Start one or more VM
-```
-$ viper start vm_01 vm_02
 ```
 
 ### Stop one or more VMs
