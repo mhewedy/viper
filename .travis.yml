@@ -12,7 +12,6 @@ script:
   - export PATH=$GOROOT/bin:$GOPATH/bin:$PATH
   - go version
   - which go
-  - "$TRAVIS_BUILD_DIR/build/build.py --procs=2 --release"
 
 before_deploy:
   - |
