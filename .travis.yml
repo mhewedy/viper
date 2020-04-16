@@ -1,7 +1,18 @@
-language: go
+language: minimal
+dist: bionic
 
-go:
-  - 1.13.x
+before_install:
+  - sudo apt-get install -y build-essential git python-pip sqlite3
+  - sudo apt-get install -y curl
+  - curl https://dl.google.com/go/go1.13.4.linux-amd64.tar.gz --output /tmp/go1.13.4.linux-amd64.tar.gz
+  - sudo tar -C /usr/local -zxf /tmp/go1.13.4.linux-amd64.tar.gz
+script:
+  - export GOROOT=/usr/local/go
+  - export GOPATH=$HOME/go
+  - export PATH=$GOROOT/bin:$GOPATH/bin:$PATH
+  - go version
+  - which go
+  - "$TRAVIS_BUILD_DIR/build/build.py --procs=2 --release"
 
 before_deploy:
   - |
