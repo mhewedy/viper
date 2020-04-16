@@ -37,7 +37,7 @@ func listRemoteImages() ([]vm, error) {
 	dir, err := ioutil.ReadDir(os.TempDir())
 	for i := range dir {
 		if strings.HasPrefix(dir[i].Name(), filePattern) {
-			tmp = os.TempDir() + dir[i].Name()
+			tmp = os.TempDir() + "/" + dir[i].Name()
 			break
 		}
 	}
