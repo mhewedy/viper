@@ -18,7 +18,7 @@ func main() {
 		if err != nil {
 			fmt.Println(err)
 		}
-		fmt.Println(images)
+		fmt.Print(images)
 	} else if args[0] == "--create" {
 		err := create(args[1])
 		if err != nil {
