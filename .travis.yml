@@ -3,6 +3,9 @@ language: go
 go:
   - 1.13.x
 
+before_install:
+  - GO111MODULE=off
+
 before_deploy:
   - |
     mkdir viper-${TRAVIS_TAG}.linux
