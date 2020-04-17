@@ -1,8 +1,8 @@
 # viper
 ### The smart Virtual Machines manager
 
-Create, control and connect to VirtualBox VM instances.
-
+#### Create, control and connect to VirtualBox VM instances.
+*tested on mac and linux*
 ----
 
 ## Prerequisites
