@@ -59,7 +59,7 @@ $ viper images
 ubuntu/bionic	(cached)
 centos/8
 ```
-Note, the *cached* flag means, the image has been already downloaded and cached before.
+> The *cached* flag means, the image has been already downloaded and cached before.
 
 ### List all created VMs
 This subcommand list all VMs (stopped and running)
