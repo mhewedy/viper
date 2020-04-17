@@ -53,7 +53,13 @@ $ viper create <image name> /path/to/provison.sh
 $ viper create ubuntu/bionic ~/init.sh
 ```
 
-> Note: To get list of all available images use `viper images`
+To get list of all available images use:
+```
+$ viper images
+ubuntu/bionic	(cached)
+centos/8
+```
+Note, the *cached* flag means, the image has been already downloaded and cached before.
 
 ### List all created VMs
 This subcommand list all VMs (stopped and running)
