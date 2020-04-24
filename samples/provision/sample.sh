@@ -6,8 +6,8 @@ echo "export PS1=\"\[\e[1;35m\]\u\[\033[m\]@\[\e[1;92m\]$(hostname -I | awk '{pr
 
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys CC86BB64
 sudo add-apt-repository ppa:rmescandon/yq
-sudo apt update
-sudo apt install yq -y
+sudo apt-get update
+sudo apt-get install yq -y
 
 sudo yq w -i /etc/netplan/50-cloud-init.yaml network.ethernets.enp0s3.dhcp4 false
 sudo yq w -i /etc/netplan/50-cloud-init.yaml network.ethernets.enp0s3.addresses[+] "$(hostname -I | awk '{print $1}')/24"
